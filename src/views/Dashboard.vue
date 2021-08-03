@@ -1,6 +1,8 @@
 <template>
   <Navbar></Navbar>
-  <router-view />
+  <div class="container-fluid">
+    <router-view />
+  </div>
 </template>
 
 <script>
@@ -20,7 +22,7 @@ export default {
 
     this.$http.post(api, this.user).then((res) => {
       if (!res.data.success) {
-        this.$router.push('login');
+        this.$router.push('/login');
       }
     });
   }
