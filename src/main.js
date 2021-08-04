@@ -7,6 +7,10 @@ import App from './App.vue';
 import router from './router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import VueLoading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+import { currency, date } from './methods/filters';
+
 defineRule('required', required);
 defineRule('email', email);
 defineRule('min', min);
@@ -17,8 +21,12 @@ configure({
 setLocale('zh_TW');
 
 const app = createApp(App).use(router);
+// 金額千分位、時間換算
+app.config.globalProperties.$filters = { currency, date };
+
 app.component('Form', Form);
 app.component('Field', Field);
 app.component('ErrorMessage', ErrorMessage);
+app.component('Loading', VueLoading);
 app.use(VueAxios, axios);
 app.mount('#app');

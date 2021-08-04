@@ -13,9 +13,11 @@
     "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
     "core-js": "^3.6.5",
+    "mitt": "^3.0.0",
     "vee-validate": "^4.4.6",
     "vue": "^3.0.0",
     "vue-axios": "^3.2.4",
+    "vue-loading-overlay": "^4.0.3",
     "vue-router": "^4.0.0-0"
   },
   "devDependencies": {
@@ -49,7 +51,12 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {"semi": ["error", "always"]}
+    "rules": {
+      "semi": [
+        "error",
+        "always"
+      ]
+    }
   },
   "browserslist": [
     "> 1%",
