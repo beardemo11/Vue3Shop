@@ -10,6 +10,7 @@ import VueAxios from 'vue-axios';
 import VueLoading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import { currency, date } from './methods/filters';
+import $httpMsgState from './methods/pushMsgState';
 
 defineRule('required', required);
 defineRule('email', email);
@@ -23,6 +24,8 @@ setLocale('zh_TW');
 const app = createApp(App).use(router);
 // 金額千分位、時間換算
 app.config.globalProperties.$filters = { currency, date };
+// 彈跳訊息
+app.config.globalProperties.$httpMsgState = $httpMsgState;
 
 app.component('Form', Form);
 app.component('Field', Field);

@@ -116,19 +116,13 @@ export default {
       const productComponent = this.$refs.productModal;
       this.$http[httpMethod](api, { data: this.tempProduct }).then(
         (response) => {
+          console.log(response);
           productComponent.hideModal();
           if (response.data.success) {
             this.getProducts();
-            this.emitter.emit('push-message', {
-              style: 'success',
-              title: '更新成功'
-            });
+            this.$httpMsgState(response, '更新產品');
           } else {
-            this.emitter.emit('push-message', {
-              style: 'danger',
-              title: '更新失敗',
-              content: response.data.message.join('、')
-            });
+            this.$httpMsgState(response, '更新產品');
           }
         }
       );
