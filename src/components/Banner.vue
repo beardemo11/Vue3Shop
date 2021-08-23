@@ -21,7 +21,7 @@
           <div class="content">
             <p class="fs-1"></p>
             <p class="fs-3">{{ item.description }}</p>
-            <a href="#/products/all" class="btn btn-dark btn-hover rounded-0"
+            <a href="#/product_list" class="btn btn-dark btn-hover rounded-0"
               >了解更多</a
             >
           </div>

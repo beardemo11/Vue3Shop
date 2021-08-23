@@ -111,13 +111,15 @@ export default {
     },
     addFavorite (product) {
       this.$store.dispatch('favoriteModules/addToFavorite', product);
+      this.$swal({ title: '已加入我的最愛', icon: 'success' });
     },
     removeCartItem (id) {
       this.$store.dispatch('cartModules/removeCartItem', id);
     },
 
     ...mapActions('productsModules', ['getProducts']),
-    ...mapActions('cartModules', ['getCart'])
+    ...mapActions('cartModules', ['getCart']),
+    ...mapActions('favoriteModules', ['getFavorite'])
   },
   computed: {
     filterProducts () {
