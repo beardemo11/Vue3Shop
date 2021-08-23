@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar w/ text</a>
+      <a class="navbar-brand" href="#">作品集 </a>
       <button
         class="navbar-toggler"
         type="button"
@@ -16,16 +16,30 @@
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <router-link to="/admin/products" class="nav-link"
+              >商品列表</router-link
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
+            <router-link to="/admin/orders" class="nav-link"
+              >訂單列表</router-link
+            >
           </li>
+          <li class="nav-item">
+            <router-link to="/admin/coupons" class="nav-link"
+              >優惠券
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/user/cart" class="nav-link">訂單範例</router-link>
+          </li>
+
+          <li class="nav-item"></li>
           <li class="nav-item">
             <a class="nav-link" href="#" @click.prevent="logout">登出</a>
           </li>
         </ul>
-        <span class="navbar-text"> Navbar text with an inline element </span>
+        <span class="navbar-text"> 豪 </span>
       </div>
     </div>
   </nav>

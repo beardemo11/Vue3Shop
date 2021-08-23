@@ -11,6 +11,11 @@ import VueLoading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import { currency, date } from './methods/filters';
 import $httpMsgState from './methods/pushMsgState';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'bootstrap';
+import store from './store';
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 defineRule('required', required);
 defineRule('email', email);
@@ -21,7 +26,7 @@ configure({
 });
 setLocale('zh_TW');
 
-const app = createApp(App).use(router);
+const app = createApp(App).use(store).use(router);
 // 金額千分位、時間換算
 app.config.globalProperties.$filters = { currency, date };
 // 彈跳訊息
@@ -32,4 +37,5 @@ app.component('Field', Field);
 app.component('ErrorMessage', ErrorMessage);
 app.component('Loading', VueLoading);
 app.use(VueAxios, axios);
+app.use(VueSweetalert2);
 app.mount('#app');
