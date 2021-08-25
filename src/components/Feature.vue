@@ -1,113 +1,69 @@
 <template>
-  <!-- Feature Start-->
-  <div class="feature">
-    <div class="container-fluid">
-      <div class="row align-items-center">
-        <div class="col-lg-3 col-md-6 feature-col">
-          <div class="feature-content">
-            <i class="fas fa-keyboard"></i>
-
-            <h2>Secure Payment</h2>
-            <p>Lorem ipsum dolor sit amet consectetur elit</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 feature-col">
-          <div class="feature-content">
-            <i class="fa fa-truck"></i>
-            <h2>Worldwide Delivery</h2>
-            <p>Lorem ipsum dolor sit amet consectetur elit</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 feature-col">
-          <div class="feature-content">
-            <i class="fa fa-sync-alt"></i>
-            <h2>90 Days Return</h2>
-            <p>Lorem ipsum dolor sit amet consectetur elit</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 feature-col">
-          <div class="feature-content">
-            <i class="fa fa-comments"></i>
-            <h2>24/7 Support</h2>
-            <p>Lorem ipsum dolor sit amet consectetur elit</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Feature End-->
-  <!-- Category Start-->
-  <div class="category">
-    <div class="container-fluid">
+  <!-- Start Promo section -->
+  <section id="aa-promo">
+    <div class="container">
       <div class="row">
-        <div class="col-md-3">
-          <div class="category-item ch-400">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Xyb3MWE8LxZLE9HkIkruMfah4Z62q1QqUomKnwQWsk4OXeU33koeLvXZy7TmNditWPXswGzrh3dWhWx_8GJQvg
-"
-            />
-            <a class="category-name" href="">
-              <p>首爾</p>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="category-item ch-250">
-            <img
-              src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRy0EK9ShbOxkTm6Mmk6Xm7d5Gie_RBIoEzo5-xon-TfdsXAGfcaqucJdRecmUKp1gaPbNwFxhOE_IT7KgLPEvjPg
-"
-            />
-            <a class="category-name" href="">
-              <p>釜山</p>
-            </a>
-          </div>
-          <div class="category-item ch-150">
-            <img
-              src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTl1H8o7mr5pL0bDCOGR53nvemcEB-szhFIVQ96C2dUgF5AKYZWhg7yq-SygsPCfa4HMz106s5L2K_xmE7sHcQYWg"
-            />
-            <a class="category-name" href="">
-              <p>濟州市</p>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="category-item ch-150">
-            <img
-              src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS3liBXocMwkztPWiuUNNty3bW0HDSS7ySPjRF8iGyjXV21g-BxNtG_Isqcl2vDtPKKLLWyRoRHqyNzr9lm2IH3fw
-"
-            />
-            <a class="category-name" href="">
-              <p>仁川</p>
-            </a>
-          </div>
-          <div class="category-item ch-250">
-            <img
-              src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQtb43nr9Bd2awA4brp7O9-91Do8bMFztcEN-KQdLx0MthVuZHjrVdSBlSsRd1l4xHO4TCG0xIDSE7uz6nXT60sRA
-"
-            />
-            <a class="category-name" href="">
-              <p>慶州市</p>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="category-item ch-400">
-            <img
-              src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQu7yn1lpp4YUXObYpVPnlPVvSmqmngo9LcAscs9ZNC5oRJpoxIXBTLW36eQxo0JTNd9v0lTbEcFT_oMd6wf_LKLQ"
-            />
-            <a class="category-name" href="">
-              <p>大邱</p>
-            </a>
+        <div class="col-md-12">
+          <div class="aa-promo-area">
+            <div class="row">
+              <!-- promo left -->
+              <div class="col-md-5 no-padding">
+                <div class="aa-promo-left">
+                  <div class="aa-promo-banner">
+                    <img src="img/promo-banner-1.jpg" alt="img" />
+                    <div class="aa-prom-content">
+                      <span>75% Off</span>
+                      <h4><a href="#">For Women</a></h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- promo right -->
+              <div class="col-md-7 no-padding">
+                <div class="aa-promo-right">
+                  <div class="aa-single-promo-right">
+                    <div class="aa-promo-banner">
+                      <img src="img/promo-banner-3.jpg" alt="img" />
+                      <div class="aa-prom-content">
+                        <span>Exclusive Item</span>
+                        <h4><a href="#">For Men</a></h4>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="aa-single-promo-right">
+                    <div class="aa-promo-banner">
+                      <img src="img/promo-banner-2.jpg" alt="img" />
+                      <div class="aa-prom-content">
+                        <span>Sale Off</span>
+                        <h4><a href="#">On Shoes</a></h4>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="aa-single-promo-right">
+                    <div class="aa-promo-banner">
+                      <img src="img/promo-banner-4.jpg" alt="img" />
+                      <div class="aa-prom-content">
+                        <span>New Arrivals</span>
+                        <h4><a href="#">For Kids</a></h4>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="aa-single-promo-right">
+                    <div class="aa-promo-banner">
+                      <img src="img/promo-banner-5.jpg" alt="img" />
+                      <div class="aa-prom-content">
+                        <span>25% Off</span>
+                        <h4><a href="#">For Bags</a></h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- Category End-->
+  </section>
+  <!-- / Promo section -->
 </template>
-
-<style scoped>
-.feature {
-  margin-top: 30px;
-}
-</style>

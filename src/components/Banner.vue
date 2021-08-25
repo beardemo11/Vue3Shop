@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="aa-slider-area">
     <Swiper
       :spaceBetween="0"
       :centeredSlides="true"
@@ -65,6 +65,12 @@ export default {
 </script>
 
 <style scoped>
+.aa-slider-area {
+  display: inline;
+  float: left;
+  width: 100%;
+}
+
 .banner {
   margin-top: 60px;
 }

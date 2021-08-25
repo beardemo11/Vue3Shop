@@ -1,90 +1,89 @@
 <template>
   <div>
     <Banner />
-
-    <!-- Product List Start -->
-    <div class="product-view">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- Side Bar Start -->
-          <div class="col-lg-4 sidebar">
-            <div class="sticky-top">
-              <ul class="list-group mb-3 category">
+    <div class="container">
+      <!-- Product List Start -->
+      <!-- <div class="product-view">
+        <div class="container-fluid"> -->
+      <div class="row">
+        <!-- Side Bar Start -->
+        <div class="col-lg-4 sidebar">
+          <div class="sidebar-widget category">
+            <h2 class="title">韓國景點</h2>
+            <nav class="navbar bg-light">
+              <ul class="navbar-nav">
                 <li
-                  class="list-group-item list-group-item-action"
+                  class="nav-item"
                   @click="filterText = ''"
                   :class="{ active: filterText === '' }"
                 >
-                  全部商品
+                  <a class="nav-link"><i class="fa fa-female"></i>全部商品 </a>
                 </li>
-
                 <li
-                  class="list-group-item list-group-item-action"
+                  class="nav-item"
                   v-for="item in categories"
                   :key="item"
-                  :class="{ active: item == filterText }"
                   @click="filterText = item"
                   v-show="item != 'Banner'"
                 >
-                  <i></i>
-                  {{ item }}
+                  <a class="nav-link"
+                    ><i class="fa fa-female"></i>{{ item }}
+                  </a>
                 </li>
               </ul>
-            </div>
+            </nav>
           </div>
-          <!-- Side Bar End -->
-          <div class="col-lg-8">
-            <div class="row">
-              <div
-                class="col-md-4"
-                v-for="item in filterProducts"
-                :key="item.id"
-              >
-                <div class="product-item">
-                  <div class="product-title">
-                    <a href="#">{{ item.title }}</a>
-                    <div class="ratting">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                    </div>
+        </div>
+        <!-- Side Bar End -->
+        <div class="col-lg-8">
+          <div class="row">
+            <div class="col-md-4" v-for="item in filterProducts" :key="item.id">
+              <div class="product-item">
+                <div class="product-title">
+                  <a href="#">{{ item.title }}</a>
+                  <div class="ratting">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
                   </div>
-                  <div class="product-image">
-                    <a href="product-detail.html">
-                      <img :src="item.imageUrl" :alt="item.title" />
-                    </a>
-                    <div class="product-action">
-                      <a href="#" @click.prevent="addCart(item.id)"
-                        ><i class="fa fa-cart-plus"></i
-                      ></a>
-                      <a href="#" @click.prevent="addFavorite(item)"
-                        ><i class="fa fa-heart"></i
-                      ></a>
-                      <a href="#"><i class="fa fa-search"></i></a>
-                    </div>
+                </div>
+                <div class="product-image">
+                  <a href="product-detail.html">
+                    <img :src="item.imageUrl" :alt="item.title" />
+                  </a>
+                  <div class="product-action">
+                    <a href="#" @click.prevent="addCart(item.id)"
+                      ><i class="fa fa-cart-plus"></i
+                    ></a>
+                    <a href="#" @click.prevent="addFavorite(item)"
+                      ><i class="fa fa-heart"></i
+                    ></a>
+                    <a href="#"><i class="fa fa-search"></i></a>
                   </div>
-                  <div class="product-price">
-                    <h3><span>$</span>{{ item.price }}</h3>
-                    <a class="btn" href=""
-                      ><i class="fa fa-shopping-cart"></i>Buy Now</a
-                    >
-                  </div>
+                </div>
+                <div class="product-price">
+                  <h3><span>$</span>{{ item.price }}</h3>
+                  <a class="btn" href=""
+                    ><i class="fa fa-shopping-cart"></i>Buy Now</a
+                  >
                 </div>
               </div>
             </div>
-            <Pagination
-              :pages="pagination"
-              @emit-page="getAllProducts"
-              v-if="filterText === ''"
-            />
           </div>
+          <Pagination
+            :pages="pagination"
+            @emit-page="getAllProducts"
+            v-if="filterText === ''"
+          />
         </div>
       </div>
     </div>
-    <!-- Product List End -->
   </div>
+  <!-- Product List End -->
+  <!-- </div>
+  </div> -->
 </template>
 
 <script>
@@ -146,17 +145,29 @@ export default {
 
 <style scoped>
 .product-image {
-  height: 250px;
+  height: 150px;
   object-fit: contain;
 }
-.col-lg-4 {
-  flex: 0 0 auto;
-  width: 20.33333%;
-}
+
 .product-view .product-view-top {
   margin-bottom: 30px;
 }
 .no-bullet {
   list-style-type: none;
 }
+.padtop {
+  padding-top: calc(var(--bs-gutter-x) * 0.5);
+}
+/* .col-lg-4 {
+  flex: 0 0 33.333333%;
+  max-width: 17.333333%;
+}
+.col-md-4 {
+  padding-bottom: calc(var(--bs-gutter-x) * 0.5);
+}
+
+.col-lg-8 {
+  flex: 0 0 auto;
+  max-width: 79.66667%;
+} */
 </style>
