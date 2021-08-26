@@ -49,7 +49,7 @@
               <button
                 type="button"
                 class="btn btn-outline-info"
-                @click="deleteItemFromCart({ cartId: item.id })"
+                @click.prevent="removeCartItem(item.id)"
               >
                 <i class="bi bi-trash"></i>
               </button>
@@ -99,6 +99,9 @@ export default {
     },
     minusCartQty (item) {
       this.$store.dispatch('cartModules/minusCartQty', item);
+    },
+    removeCartItem (id) {
+      this.$store.dispatch('cartModules/removeCartItem', id);
     },
 
     ...mapActions('cartModules', ['getCart']),

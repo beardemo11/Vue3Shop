@@ -1,101 +1,213 @@
 <template>
-  <div>
-    <Banner />
-    <div class="container">
-      <!-- Product List Start -->
-      <!-- <div class="product-view">
-        <div class="container-fluid"> -->
-      <div class="row">
-        <!-- Side Bar Start -->
-        <div class="col-lg-4 sidebar">
-          <div class="sidebar-widget category">
-            <h2 class="title">韓國景點</h2>
-            <nav class="navbar bg-light">
-              <ul class="navbar-nav">
-                <li
-                  class="nav-item"
-                  @click="filterText = ''"
-                  :class="{ active: filterText === '' }"
-                >
-                  <a class="nav-link"><i class="fa fa-female"></i>全部商品 </a>
-                </li>
-                <li
-                  class="nav-item"
-                  v-for="item in categories"
-                  :key="item"
-                  @click="filterText = item"
-                  v-show="item != 'Banner'"
-                >
-                  <a class="nav-link"
-                    ><i class="fa fa-female"></i>{{ item }}
-                  </a>
-                </li>
-              </ul>
-            </nav>
+  <!-- Start Content -->
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-3">
+        <h1 class="h2 pb-4">韓國旅遊景點</h1>
+        <ul class="list-unstyled templatemo-accordion">
+          <li
+            class="pb-3"
+            @click="filterText = ''"
+            :class="{ active: filterText === '' }"
+          >
+            <a
+              class="
+                collapsed
+                d-flex
+                justify-content-between
+                h3
+                text-decoration-none
+              "
+              >全部景點
+            </a>
+          </li>
+          <li
+            class="pb-3"
+            v-for="item in categories"
+            :key="item"
+            @click="filterText = item"
+            v-show="item != 'Banner'"
+          >
+            <a
+              class="
+                collapsed
+                d-flex
+                justify-content-between
+                h3
+                text-decoration-none
+              "
+            >
+              {{ item }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-lg-9">
+        <div class="row">
+          <div class="col-md-6">
+            <ul class="list-inline shop-top-menu pb-3 pt-1">
+              <li class="list-inline-item">
+                <a class="h3 text-dark text-decoration-none mr-3" href="#"
+                  >首爾
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6 pb-4">
+            <div class="d-flex">
+              <select class="form-control">
+                <option>Featured</option>
+                <option>A to Z</option>
+                <option>Item</option>
+              </select>
+            </div>
           </div>
         </div>
-        <!-- Side Bar End -->
-        <div class="col-lg-8">
-          <div class="row">
-            <div class="col-md-4" v-for="item in filterProducts" :key="item.id">
-              <div class="product-item">
-                <div class="product-title">
-                  <a href="#">{{ item.title }}</a>
-                  <div class="ratting">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                  </div>
+        <div class="row">
+          <div class="col-md-4" v-for="item in filterProducts" :key="item.id">
+            <div class="card mb-4 product-wap rounded-0">
+              <div class="card rounded-0">
+                <img
+                  class="card-img rounded-0 img-fluid"
+                  :src="item.imageUrl"
+                  :alt="item.title"
+                />
+                <div
+                  class="
+                    card-img-overlay
+                    rounded-0
+                    product-overlay
+                    d-flex
+                    align-items-center
+                    justify-content-center
+                  "
+                >
+                  <ul class="list-unstyled">
+                    <li>
+                      <a
+                        class="btn btn-success text-white"
+                        href="#"
+                        @click.prevent="addFavorite(item)"
+                        ><i class="far fa-heart"></i
+                      ></a>
+                    </li>
+                    <li>
+                      <a
+                        class="btn btn-success text-white mt-2"
+                        href="#"
+                        @click.prevent="getProduct(item.id)"
+                        ><i class="far fa-eye"></i
+                      ></a>
+                    </li>
+                    <li>
+                      <a
+                        class="btn btn-success text-white mt-2"
+                        href="#"
+                        @click.prevent="addCart(item.id)"
+                        ><i class="fas fa-cart-plus"></i
+                      ></a>
+                    </li>
+                  </ul>
                 </div>
-                <div class="product-image">
-                  <a href="product-detail.html">
-                    <img :src="item.imageUrl" :alt="item.title" />
-                  </a>
-                  <div class="product-action">
-                    <a href="#" @click.prevent="addCart(item.id)"
-                      ><i class="fa fa-cart-plus"></i
-                    ></a>
-                    <a href="#" @click.prevent="addFavorite(item)"
-                      ><i class="fa fa-heart"></i
-                    ></a>
-                    <a href="#"><i class="fa fa-search"></i></a>
-                  </div>
-                </div>
-                <div class="product-price">
-                  <h3><span>$</span>{{ item.price }}</h3>
-                  <a class="btn" href=""
-                    ><i class="fa fa-shopping-cart"></i>Buy Now</a
-                  >
-                </div>
+              </div>
+              <div class="card-body">
+                <a href="#" class="h3 text-decoration-none"
+                  >{{ item.title }}
+                </a>
+                <ul
+                  class="
+                    w-100
+                    list-unstyled
+                    d-flex
+                    justify-content-between
+                    mb-0
+                  "
+                >
+                  <li class="pt-2">
+                    <span
+                      class="
+                        product-color-dot
+                        color-dot-red
+                        float-left
+                        rounded-circle
+                        ml-1
+                      "
+                    ></span>
+                    <span
+                      class="
+                        product-color-dot
+                        color-dot-blue
+                        float-left
+                        rounded-circle
+                        ml-1
+                      "
+                    ></span>
+                    <span
+                      class="
+                        product-color-dot
+                        color-dot-black
+                        float-left
+                        rounded-circle
+                        ml-1
+                      "
+                    ></span>
+                    <span
+                      class="
+                        product-color-dot
+                        color-dot-light
+                        float-left
+                        rounded-circle
+                        ml-1
+                      "
+                    ></span>
+                    <span
+                      class="
+                        product-color-dot
+                        color-dot-green
+                        float-left
+                        rounded-circle
+                        ml-1
+                      "
+                    ></span>
+                  </li>
+                </ul>
+                <ul class="list-unstyled d-flex justify-content-center mb-1">
+                  <li>
+                    <i class="text-warning fa fa-star"></i>
+                    <i class="text-warning fa fa-star"></i>
+                    <i class="text-warning fa fa-star"></i>
+                    <i class="text-muted fa fa-star"></i>
+                    <i class="text-muted fa fa-star"></i>
+                  </li>
+                </ul>
+                <p class="text-center mb-0">${{ item.price }}</p>
               </div>
             </div>
           </div>
-          <Pagination
-            :pages="pagination"
-            @emit-page="getAllProducts"
-            v-if="filterText === ''"
-          />
         </div>
       </div>
     </div>
   </div>
-  <!-- Product List End -->
-  <!-- </div>
-  </div> -->
+  <Pagination
+    :pages="pagination"
+    @emit-page="getAllProducts"
+    v-if="filterText === ''"
+  />
+
+  <!-- End Content -->
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import Pagination from '@/components/Pagination.vue';
-import Banner from '@/components/Banner.vue';
+// import Banner from '@/components/Banner.vue';
 
 export default {
   data () {
     return { product: {}, filterText: '' };
   },
-  components: { Banner, Pagination },
+  components: { Pagination },
 
   methods: {
     getAllProducts (page = 1) {
@@ -142,32 +254,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.product-image {
-  height: 150px;
-  object-fit: contain;
-}
-
-.product-view .product-view-top {
-  margin-bottom: 30px;
-}
-.no-bullet {
-  list-style-type: none;
-}
-.padtop {
-  padding-top: calc(var(--bs-gutter-x) * 0.5);
-}
-/* .col-lg-4 {
-  flex: 0 0 33.333333%;
-  max-width: 17.333333%;
-}
-.col-md-4 {
-  padding-bottom: calc(var(--bs-gutter-x) * 0.5);
-}
-
-.col-lg-8 {
-  flex: 0 0 auto;
-  max-width: 79.66667%;
-} */
-</style>

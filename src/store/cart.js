@@ -11,7 +11,6 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
       context.commit('LOADING', true, { root: true });
       axios.get(url).then((res) => {
-        console.log(res.data);
         context.commit('CART', res.data.data);
         context.commit('CART_LENGTH', res.data.data.carts.length);
         context.commit('LOADING', false, { root: true });
@@ -37,11 +36,11 @@ export default {
         context.commit('LOADING', false, { root: true });
       });
     },
-    minus (context, item) {
+    minusCartQty (context, item) {
       context.state.cart.carts.forEach((cartItem) => {
         if (item.product_id === cartItem.product_id) {
           if (cartItem.qty > 1) {
-            context.commit('MINUS', cartItem);
+            context.commit('MINUSCARTQTY', cartItem);
           }
         }
       });
@@ -54,10 +53,10 @@ export default {
         context.dispatch('getCart');
       });
     },
-    add (context, item) {
+    addCartQty (context, item) {
       context.state.cart.carts.forEach((cartItem) => {
         if (item.product_id === cartItem.product_id) {
-          context.commit('ADD', cartItem);
+          context.commit('ADDCARTQTY', cartItem);
         }
       });
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`;
@@ -77,10 +76,10 @@ export default {
     CART_LENGTH (state, payload) {
       state.cartLength = payload;
     },
-    MINUS (state, payload) {
+    MINUSCARTQTY (state, payload) {
       payload.qty -= 1;
     },
-    ADD (state, payload) {
+    ADDCARTQTY (state, payload) {
       payload.qty += 1;
     }
   },

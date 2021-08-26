@@ -79,7 +79,6 @@ export default {
       this.$store.dispatch('updateLoading', true);
       this.$http.get(api).then((res) => {
         if (res.data.success) {
-          console.log(res.data);
           this.products = res.data.products;
           this.pagination = res.data.pagination;
         }
