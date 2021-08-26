@@ -24,6 +24,10 @@ const routes = [
       {
         path: 'product/:productId',
         component: () => import('../views/Front/Product.vue')
+      },
+      {
+        path: 'cartList',
+        component: () => import('../views/Front/CartList.vue')
       }
     ]
   },

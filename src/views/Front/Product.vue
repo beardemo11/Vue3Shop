@@ -90,7 +90,7 @@
                     class="btn btn-success btn-lg"
                     name="submit"
                     value="buy"
-                    @click.prevent="changeRoute('/cart')"
+                    @click.prevent="changeRoute('/cartList')"
                   >
                     直接購買
                   </button>
