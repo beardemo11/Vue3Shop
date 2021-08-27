@@ -9,7 +9,7 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueLoading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
-import { currency, date } from './methods/filters';
+import { currency, date, time } from './methods/filters';
 import $httpMsgState from './methods/pushMsgState';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap';
@@ -28,7 +28,7 @@ setLocale('zh_TW');
 
 const app = createApp(App).use(store).use(router);
 // 金額千分位、時間換算
-app.config.globalProperties.$filters = { currency, date };
+app.config.globalProperties.$filters = { currency, date, time };
 // 彈跳訊息
 app.config.globalProperties.$httpMsgState = $httpMsgState;
 

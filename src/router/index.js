@@ -30,8 +30,12 @@ const routes = [
         component: () => import('../views/Front/CartList.vue')
       },
       {
-        path: 'orderForm',
+        path: 'orderForm/:orderId',
         component: () => import('../views/Front/OrderForm.vue')
+      },
+      {
+        path: 'checkout',
+        component: () => import('../views/Front/Checkout.vue')
       }
     ]
   },

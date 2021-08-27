@@ -122,7 +122,7 @@
                 </td>
                 <td colspan="2" align="right">
                   <a
-                    href="#/orderForm"
+                    href="#/checkout"
                     v-if="cartLength > 0"
                     class="btn btn-success"
                   >
