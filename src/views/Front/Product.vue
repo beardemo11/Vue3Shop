@@ -12,8 +12,8 @@
         <div class="col-lg-7 mt-5">
           <div class="card">
             <div class="card-body">
-              <h1 class="h2">{{ product.title }}</h1>
-              <p class="h3 py-2">${{ product.price }}</p>
+              <h1 class="h2 fw-bold">{{ product.title }}</h1>
+              <p class="h3 py-2 fw-bold">${{ product.price }}</p>
               <!-- <p class="py-2">
                 <i class="fa fa-star text-warning"></i>
                 <i class="fa fa-star text-warning"></i>
@@ -33,8 +33,8 @@
                 </li>
               </ul> -->
 
-              <h6>說明:</h6>
-              <p>
+              <h6 class="fw-bold">說明:</h6>
+              <p class="fw-bold">
                 {{ product.description }}
               </p>
               <!-- <ul class="list-inline">
@@ -50,7 +50,7 @@
               <div class="row">
                 <div class="col-auto">
                   <ul class="list-inline pb-3">
-                    <li class="list-inline-item text-right">
+                    <li class="list-inline-item text-right fw-bold">
                       數量
                       <input
                         v-model="cartSelect"
@@ -87,7 +87,7 @@
                 <div class="col d-grid">
                   <button
                     type="submit"
-                    class="btn btn-success btn-lg"
+                    class="btn btn-success btn-lg fw-bold"
                     name="submit"
                     value="buy"
                     @click.prevent="changeRoute('/cartList')"
@@ -98,7 +98,7 @@
                 <div class="col d-grid">
                   <button
                     type="submit"
-                    class="btn btn-success btn-lg"
+                    class="btn btn-success btn-lg fw-bold"
                     name="submit"
                     value="addtocard"
                     @click.prevent="addCart(id, cartSelect)"
@@ -166,13 +166,13 @@ export default {
     ...mapActions('productsModules', ['getProducts'])
   },
   computed: {
-    otherFilter () {
-      return this.products.filter((item) => {
-        if (item.category === this.product.category) {
-          return item.category === this.product.category;
-        }
-      });
-    },
+    // otherFilter () {
+    //   return this.products.filter((item) => {
+    //     if (item.category === this.product.category) {
+    //       return item.category === this.product.category;
+    //     }
+    //   });
+    // },
     ...mapGetters('productsModules', ['products'])
   },
   created () {

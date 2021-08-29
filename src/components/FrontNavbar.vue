@@ -82,16 +82,10 @@
         <div class="flex-fill">
           <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
+              <a class="nav-link fw-bold" href="index.html">商品列表</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about.html">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="shop.html">Shop</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact</a>
+              <a class="nav-link fw-bold" href="about.html">訂單查詢</a>
             </li>
           </ul>
         </div>
@@ -133,14 +127,15 @@
                 translate-middle
                 badge
                 rounded-pill
-                bg-light
-                text-dark
+                bg-danger
+                text-white
               "
               >{{ cartLength }}
             </span>
           </a>
+
           <a class="nav-icon position-relative text-decoration-none" href="#">
-            <i class="fa fa-fw fa-user text-dark mr-3"></i>
+            <i class="fas fa-heart"></i>
             <span
               class="
                 position-absolute
@@ -149,10 +144,10 @@
                 translate-middle
                 badge
                 rounded-pill
-                bg-light
-                text-dark
+                bg-danger
+                text-white
               "
-              >+99
+              >9
             </span>
           </a>
           <CartOffcanvas />

@@ -3,7 +3,7 @@
   <section class="py-5">
     <div class="container">
       <div class="row text-left p-2 pb-3">
-        <h4>Related Products</h4>
+        <h4 class="fw-bold">熱門景點</h4>
       </div>
 
       <!--Start Carousel Wrapper-->
@@ -38,21 +38,24 @@
                       <li>
                         <a
                           class="btn btn-success text-white"
-                          href="shop-single.html"
+                          href="#"
+                          @click.prevent="addFavorite(item)"
                           ><i class="far fa-heart"></i
                         ></a>
                       </li>
                       <li>
                         <a
                           class="btn btn-success text-white mt-2"
-                          href="shop-single.html"
+                          href=""
+                          @click.prevent="getProduct(item.id)"
                           ><i class="far fa-eye"></i
                         ></a>
                       </li>
                       <li>
                         <a
                           class="btn btn-success text-white mt-2"
-                          href="shop-single.html"
+                          href="#"
+                          @click.prevent="addCart(item.id)"
                           ><i class="fas fa-cart-plus"></i
                         ></a>
                       </li>
@@ -60,7 +63,7 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <a href="shop-single.html" class="h3 text-decoration-none">{{
+                  <a href="#" class="h3 text-decoration-none fw-bold">{{
                     item.title
                   }}</a>
                   <ul
@@ -129,7 +132,7 @@
                       <i class="text-muted fa fa-star"></i>
                     </li>
                   </ul>
-                  <p class="text-center mb-0">${{ item.price }}</p>
+                  <p class="text-center mb-0 fw-bold">${{ item.price }}</p>
                 </div>
               </div>
             </div>
@@ -175,13 +178,22 @@ export default {
     ...mapGetters('productsModules', ['products', 'categories'])
   },
   methods: {
-    buyNow (id, qty = 1) {
+    getProduct (id) {
+      console.log(id);
+      this.$router.push(`/product/${id}`);
+    },
+    addCart (id, qty = 1) {
       this.$store.dispatch('cartModules/addCart', { id, qty });
+      this.$swal({ title: '加入購物車成功', icon: 'success' });
+    },
+    addFavorite (product) {
+      this.$store.dispatch('favoriteModules/addToFavorite', product);
       this.$swal({
-        title: '加入購物車成功',
+        title: '已加入我的最愛',
         icon: 'success'
       });
     },
+
     ...mapActions('productsModules', ['getProducts'])
   },
 

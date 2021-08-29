@@ -88,7 +88,7 @@
               >
                 已付款
               </p>
-              <p class="bg-error rounded text-white px-2" v-else>未付款</p>
+              <p class="bg-danger rounded text-white px-2" v-else>未付款</p>
             </li>
           </ul>
         </div>

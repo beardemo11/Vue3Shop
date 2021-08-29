@@ -3,13 +3,9 @@
   <div class="container py-5">
     <div class="row">
       <div class="col-lg-3">
-        <h1 class="h2 pb-4">韓國旅遊景點</h1>
+        <h1 class="h2 pb-4 fw-bold">韓國旅遊景點</h1>
         <ul class="list-unstyled templatemo-accordion">
-          <li
-            class="pb-3"
-            @click="filterText = ''"
-            :class="{ active: filterText === '' }"
-          >
+          <li class="pb-3" @click="filterText = ''">
             <a
               class="
                 collapsed
@@ -17,7 +13,9 @@
                 justify-content-between
                 h3
                 text-decoration-none
+                fw-bold
               "
+              :class="{ 'text-success': filterText === '' }"
               >全部景點
             </a>
           </li>
@@ -35,7 +33,9 @@
                 justify-content-between
                 h3
                 text-decoration-none
+                fw-bold
               "
+              :class="{ 'text-success': filterText === item }"
             >
               {{ item }}
             </a>
@@ -45,24 +45,39 @@
 
       <div class="col-lg-9">
         <div class="row">
-          <div class="col-md-6">
+          <!-- <div class="col-md-6">
             <ul class="list-inline shop-top-menu pb-3 pt-1">
               <li class="list-inline-item">
-                <a class="h3 text-dark text-decoration-none mr-3" href="#"
-                  >首爾
+                <a
+                  class="h3 text-dark text-decoration-none mr-3 fw-bold"
+                  href="#"
+                  >{{ filterText }}
                 </a>
               </li>
             </ul>
-          </div>
-          <div class="col-md-6 pb-4">
+          </div> -->
+          <!-- <div class="col-md-6 pb-4">
             <div class="d-flex">
-              <select class="form-control">
-                <option>Featured</option>
-                <option>A to Z</option>
-                <option>Item</option>
-              </select>
+              <form class="modal-content modal-body border-0 p-0">
+                <div class="input-group mb-2">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inputModalSearch"
+                    name="q"
+                    placeholder="Search"
+                    v-model="searchText"
+                  />
+                  <button
+                    type="submit"
+                    class="input-group-text bg-success text-light"
+                  >
+                    <i class="fa fa-fw fa-search text-white"></i>
+                  </button>
+                </div>
+              </form>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="row">
           <div class="col-md-4" v-for="item in filterProducts" :key="item.id">
@@ -112,7 +127,7 @@
                 </div>
               </div>
               <div class="card-body">
-                <a href="#" class="h3 text-decoration-none"
+                <a href="#" class="h3 text-decoration-none fw-bold"
                   >{{ item.title }}
                 </a>
                 <ul
@@ -181,7 +196,19 @@
                     <i class="text-muted fa fa-star"></i>
                   </li>
                 </ul>
-                <p class="text-center mb-0">${{ item.price }}</p>
+                <p class="text-center mb-0 fw-bold">NT ${{ item.price }}</p>
+              </div>
+            </div>
+          </div>
+          <div
+            v-if="
+              (searchText || filterProducts.length) &&
+              filterProducts.length == 0
+            "
+          >
+            <div class="col-12 mb-4">
+              <div class="no-results bg-grayf8">
+                <p>找不到有關 '{{ searchText }}'</p>
               </div>
             </div>
           </div>
@@ -205,7 +232,7 @@ import Pagination from '@/components/Pagination.vue';
 
 export default {
   data () {
-    return { product: {}, filterText: '' };
+    return { product: {}, filterText: '', searchText: '' };
   },
   components: { Pagination },
 
@@ -224,21 +251,40 @@ export default {
       this.$store.dispatch('favoriteModules/addToFavorite', product);
       this.$swal({ title: '已加入我的最愛', icon: 'success' });
     },
-    removeCartItem (id) {
-      this.$store.dispatch('cartModules/removeCartItem', id);
-    },
 
     ...mapActions('productsModules', ['getProducts']),
     ...mapActions('cartModules', ['getCart']),
     ...mapActions('favoriteModules', ['getFavorite'])
   },
   computed: {
+    // filterCategory () {
+    //   if (this.filterText === '') {
+    //     return this.allProducts.filter((item) => item.category !== 'Banner');
+    //   }
+    //   return this.products.filter((item) => item.category === this.filterText);
+    // },
     filterProducts () {
-      if (this.filterText === '') {
-        return this.allProducts.filter((item) => item.category !== 'Banner');
+      const allProducts = this.allProducts.filter(
+        (item) => item.category !== 'Banner'
+      );
+
+      if (this.filterText === '' && !this.searchText) {
+        return allProducts.filter((item) =>
+          item.title.toLowerCase().includes(this.searchText.toLowerCase())
+        );
+      } else if (!this.searchText) {
+        return this.products.filter((item) =>
+          this.filterText.includes(item.category)
+        );
+      } else if (this.searchText) {
+        return this.products.filter((item) =>
+          item.title.toLowerCase().includes(this.searchText.toLowerCase())
+        );
       }
-      return this.products.filter((item) => item.category === this.filterText);
+
+      return this.products;
     },
+
     ...mapGetters('productsModules', [
       'products',
       'categories',

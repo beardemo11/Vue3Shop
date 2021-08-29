@@ -6,7 +6,7 @@
     aria-labelledby="offcanvasRightLabel"
   >
     <div class="offcanvas-header border-bottom">
-      <h5 id="offcanvasRightLabel">購物車</h5>
+      <h5 id="offcanvasRightLabel" class="fw-bold">購物車</h5>
       <button
         type="button"
         class="btn-close text-reset"
@@ -32,8 +32,8 @@
             />
           </div>
           <div class="w-75 ms-3">
-            <h3 class="h6 mb-1">{{ item.product.title }}</h3>
-            <p class="fw-bold text-info">
+            <h3 class="h6 mb-1 fw-bold">{{ item.product.title }}</h3>
+            <p class="fw-bold text-success p1">
               NT ${{ $filters.currency(item.product.price) }}
             </p>
             <div class="d-flex justify-content-between align-items-end">
@@ -61,7 +61,7 @@
       <div>
         <div class="offcanvas-footer border">
           <div class="p-3">
-            <p>
+            <p class="fw-bold">
               購買<span class="text-secondary px-2">{{ cartLength }}</span
               >項產品
             </p>
@@ -70,16 +70,16 @@
             </h4>
             <template v-if="cart.final_total !== 0">
               <button
-                @click.prevent="changeRoute('/cart')"
+                @click.prevent="changeRoute('/cartList')"
                 type="button"
-                class="btn btn-outline-primary btn-lg w-100 mb-3"
+                class="btn btn-outline-success btn-lg w-100 mb-3"
               >
                 購物車
               </button>
               <a
                 href="#"
                 @click.prevent="changeRoute('/checkout')"
-                class="btn btn-primary btn-lg w-100 text-white"
+                class="btn btn-success btn-lg w-100 text-white"
                 >直接購買</a
               >
             </template>
@@ -103,6 +103,9 @@ export default {
     removeCartItem (id) {
       this.$store.dispatch('cartModules/removeCartItem', id);
     },
+    changeRoute (router) {
+      this.$router.push(router);
+    },
 
     ...mapActions('cartModules', ['getCart']),
     ...mapActions('favoriteModules', ['getFavorite'])
@@ -120,3 +123,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.p1 {
+  margin-bottom: -1rem;
+}
+</style>
