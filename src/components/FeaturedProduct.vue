@@ -154,6 +154,7 @@ SwiperCore.use([Autoplay, Pagination]);
 
 export default {
   components: { Swiper, SwiperSlide },
+  inject: ['reload'],
   data () {
     return {
       options: {
@@ -194,6 +195,11 @@ export default {
     },
 
     ...mapActions('productsModules', ['getProducts'])
+  },
+  watch: {
+    $route (to, from) {
+      this.$router.go(0);
+    }
   },
 
   created () {

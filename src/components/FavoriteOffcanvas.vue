@@ -102,6 +102,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 export default {
+  inject: ['reload'],
   data () {
     return {};
   },
@@ -122,6 +123,12 @@ export default {
   computed: {
     ...mapGetters('favoriteModules', ['favorites', 'favoritesLength'])
   },
+  watch: {
+    $route (to, from) {
+      this.$router.go(0);
+    }
+  },
+
   created () {}
 };
 </script>
