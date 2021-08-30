@@ -47,7 +47,7 @@
                         <a
                           class="btn btn-success text-white mt-2"
                           href=""
-                          @click.prevent="getProduct(item.id)"
+                          @click.prevent="goToProduct(item.id)"
                           ><i class="far fa-eye"></i
                         ></a>
                       </li>
@@ -178,8 +178,7 @@ export default {
     ...mapGetters('productsModules', ['products', 'categories'])
   },
   methods: {
-    getProduct (id) {
-      console.log(id);
+    goToProduct (id) {
       this.$router.push(`/product/${id}`);
     },
     addCart (id, qty = 1) {

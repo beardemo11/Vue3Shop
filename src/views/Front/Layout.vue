@@ -1,5 +1,7 @@
 <template>
   <div>
+    <Loading :active="isLoading"></Loading>
+
     <FrontNavbar />
     <router-view></router-view>
     <Footer></Footer>
@@ -17,6 +19,11 @@ export default {
   },
   data () {
     return {};
+  },
+  computed: {
+    isLoading () {
+      return this.$store.state.isLoading;
+    }
   }
 };
 </script>

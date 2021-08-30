@@ -49,11 +49,8 @@
   <!-- Header -->
   <nav class="navbar navbar-expand-lg navbar-light shadow">
     <div class="container d-flex justify-content-between align-items-center">
-      <a
-        class="navbar-brand text-success logo h1 align-self-center"
-        href="index.html"
-      >
-        Zay
+      <a class="navbar-brand text-success logo h1 align-self-center" href="#">
+        隨心飛
       </a>
 
       <button
@@ -82,7 +79,7 @@
         <div class="flex-fill">
           <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
             <li class="nav-item">
-              <a class="nav-link fw-bold" href="index.html">商品列表</a>
+              <a class="nav-link fw-bold" href="#/product_list">商品列表</a>
             </li>
             <li class="nav-item">
               <a class="nav-link fw-bold" href="about.html">訂單查詢</a>
@@ -90,7 +87,7 @@
           </ul>
         </div>
         <div class="navbar align-self-center d-flex">
-          <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
+          <!-- <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
             <div class="input-group">
               <input
                 type="text"
@@ -110,7 +107,7 @@
             data-bs-target="#templatemo_search"
           >
             <i class="fa fa-fw fa-search text-dark mr-2"></i>
-          </a>
+          </a> -->
           <a
             class="nav-icon position-relative text-decoration-none"
             data-bs-toggle="offcanvas"
@@ -134,8 +131,14 @@
             </span>
           </a>
 
-          <a class="nav-icon position-relative text-decoration-none" href="#">
-            <i class="fas fa-heart"></i>
+          <a
+            class="nav-icon position-relative text-decoration-none"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#FavoriteOffcanvas"
+            aria-controls="FavoriteOffcanvas"
+            href="Favorite"
+          >
+            <i class="fas fa-heart text-dark"></i>
             <span
               class="
                 position-absolute
@@ -147,10 +150,11 @@
                 bg-danger
                 text-white
               "
-              >9
+              >{{ favoritesLength }}
             </span>
           </a>
           <CartOffcanvas />
+          <FavoriteOffcanvas />
         </div>
       </div>
     </div>
@@ -161,9 +165,10 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import CartOffcanvas from '@/components/CartOffcanvas.vue';
+import FavoriteOffcanvas from '@/components/FavoriteOffcanvas.vue';
 
 export default {
-  components: { CartOffcanvas },
+  components: { CartOffcanvas, FavoriteOffcanvas },
 
   methods: {
     ...mapActions('cartModules', ['getCart']),

@@ -19,8 +19,11 @@ export default {
     addToFavorite (context, product) {
       const favoriteData = {
         id: product.id,
-        title: product.title
+        title: product.title,
+        imageUrl: product.imageUrl,
+        price: product.price
       };
+
       context.commit('PUSH_FAVORITE', favoriteData);
       localStorage.setItem(
         'favoriteData',
