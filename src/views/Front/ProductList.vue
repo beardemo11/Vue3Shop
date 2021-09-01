@@ -5,8 +5,10 @@
       <div class="col-lg-3">
         <h1 class="h2 pb-4 fw-bold">韓國旅遊景點</h1>
         <ul class="list-unstyled templatemo-accordion">
-          <li class="pb-3" @click="changeCategories('')">
+          <li class="pb-3">
             <a
+              href="#"
+              @click="changeCategories('')"
               class="
                 collapsed
                 d-flex
@@ -23,10 +25,11 @@
             class="pb-3"
             v-for="item in categories"
             :key="item"
-            @click="changeCategories(item)"
             v-show="item != 'Banner'"
           >
             <a
+              href="#"
+              @click.prevent="changeCategories(item)"
               class="
                 collapsed
                 d-flex
@@ -127,76 +130,22 @@
                 </div>
               </div>
               <div class="card-body">
-                <a href="#" class="h3 text-decoration-none fw-bold"
+                <a
+                  href="#"
+                  @click.prevent="getProduct(item.id)"
+                  class="h3 text-decoration-none fw-bold"
                   >{{ item.title }}
+                  <ul class="list-unstyled d-flex justify-content-center mb-1">
+                    <li>
+                      <i class="text-warning fa fa-star"></i>
+                      <i class="text-warning fa fa-star"></i>
+                      <i class="text-warning fa fa-star"></i>
+                      <i class="text-muted fa fa-star"></i>
+                      <i class="text-muted fa fa-star"></i>
+                    </li>
+                  </ul>
+                  <p class="text-center mb-0 fw-bold">NT ${{ item.price }}</p>
                 </a>
-                <ul
-                  class="
-                    w-100
-                    list-unstyled
-                    d-flex
-                    justify-content-between
-                    mb-0
-                  "
-                >
-                  <li class="pt-2">
-                    <span
-                      class="
-                        product-color-dot
-                        color-dot-red
-                        float-left
-                        rounded-circle
-                        ml-1
-                      "
-                    ></span>
-                    <span
-                      class="
-                        product-color-dot
-                        color-dot-blue
-                        float-left
-                        rounded-circle
-                        ml-1
-                      "
-                    ></span>
-                    <span
-                      class="
-                        product-color-dot
-                        color-dot-black
-                        float-left
-                        rounded-circle
-                        ml-1
-                      "
-                    ></span>
-                    <span
-                      class="
-                        product-color-dot
-                        color-dot-light
-                        float-left
-                        rounded-circle
-                        ml-1
-                      "
-                    ></span>
-                    <span
-                      class="
-                        product-color-dot
-                        color-dot-green
-                        float-left
-                        rounded-circle
-                        ml-1
-                      "
-                    ></span>
-                  </li>
-                </ul>
-                <ul class="list-unstyled d-flex justify-content-center mb-1">
-                  <li>
-                    <i class="text-warning fa fa-star"></i>
-                    <i class="text-warning fa fa-star"></i>
-                    <i class="text-warning fa fa-star"></i>
-                    <i class="text-muted fa fa-star"></i>
-                    <i class="text-muted fa fa-star"></i>
-                  </li>
-                </ul>
-                <p class="text-center mb-0 fw-bold">NT ${{ item.price }}</p>
               </div>
             </div>
           </div>
