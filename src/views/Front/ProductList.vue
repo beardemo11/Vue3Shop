@@ -80,7 +80,7 @@
           </div> -->
         </div>
         <div class="row">
-          <div class="col-md-4" v-for="item in filterProducts" :key="item.id">
+          <div class="col-md-4" v-for="item in renderProducts" :key="item.id">
             <div class="card mb-4 product-wap rounded-0">
               <div class="card rounded-0">
                 <img
@@ -202,8 +202,8 @@
           </div>
           <div
             v-if="
-              (searchText || filterProducts.length) &&
-              filterProducts.length == 0
+              (searchText || renderProducts.length) &&
+              renderProducts.length == 0
             "
           >
             <div class="col-12 mb-4">
@@ -216,11 +216,7 @@
       </div>
     </div>
   </div>
-  <Pagination
-    :pages="pagination"
-    @emit-page="getAllProducts"
-    v-if="filterText === ''"
-  />
+  <Pagination :paginationData="paginationData" @getData="getRenderProducts" />
 
   <!-- End Content -->
 </template>
@@ -232,7 +228,13 @@ import Pagination from '@/components/Pagination.vue';
 
 export default {
   data () {
-    return { product: {}, filterText: '', searchText: '' };
+    return {
+      resultProduct: [],
+      filterText: '',
+      searchText: '',
+      paginationData: {},
+      renderProducts: []
+    };
   },
   components: { Pagination },
 
@@ -251,6 +253,50 @@ export default {
       this.$store.dispatch('favoriteModules/addToFavorite', product);
       this.$swal({ title: '已加入我的最愛', icon: 'success' });
     },
+    getAllProductsData () {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
+      this.$http.get(url).then((res) => {
+        if (res.data.success) {
+          this.resultProduct = res.data.products.filter(
+            (item) => item.category !== 'Banner'
+          );
+          this.getPaginationData();
+          this.getRenderProducts();
+        }
+      });
+    },
+    getRenderProducts (page = 1) {
+      this.getPaginationData(page);
+      this.renderProducts = [];
+      const minNum = (page - 1) * 10;
+      const maxNum = page * 10 - 1;
+      this.resultProduct.forEach((item, index) => {
+        if (minNum <= index && index <= maxNum) {
+          this.renderProducts.push(item);
+        }
+      });
+      console.log(page);
+    },
+    getPaginationData (page = 1) {
+      const pageData = {};
+      pageData.total_pages = Math.ceil(this.resultProduct.length / 10);
+      pageData.current_page = page;
+      if (pageData.current_page + 1 > pageData.total_pages) {
+        pageData.has_next = false;
+      } else {
+        pageData.has_next = true;
+      }
+      if (pageData.current_page === 1) {
+        pageData.has_pre = false;
+      } else {
+        pageData.has_pre = true;
+      }
+      this.paginationData = pageData;
+    },
+    updatePage (page) {
+      this.page = page;
+      window.scrollTo(0, 0);
+    },
 
     ...mapActions('productsModules', ['getProducts']),
     ...mapActions('cartModules', ['getCart']),
@@ -263,27 +309,27 @@ export default {
     //   }
     //   return this.products.filter((item) => item.category === this.filterText);
     // },
-    filterProducts () {
-      const allProducts = this.allProducts.filter(
-        (item) => item.category !== 'Banner'
-      );
+    // filterProducts () {
+    //   const allProducts = this.allProducts.filter(
+    //     (item) => item.category !== 'Banner'
+    //   );
 
-      if (this.filterText === '' && !this.searchText) {
-        return allProducts.filter((item) =>
-          item.title.toLowerCase().includes(this.searchText.toLowerCase())
-        );
-      } else if (!this.searchText) {
-        return this.products.filter((item) =>
-          this.filterText.includes(item.category)
-        );
-      } else if (this.searchText) {
-        return this.products.filter((item) =>
-          item.title.toLowerCase().includes(this.searchText.toLowerCase())
-        );
-      }
+    //   if (this.filterText === '' && !this.searchText) {
+    //     return allProducts.filter((item) =>
+    //       item.title.toLowerCase().includes(this.searchText.toLowerCase())
+    //     );
+    //   } else if (!this.searchText) {
+    //     return this.products.filter((item) =>
+    //       this.filterText.includes(item.category)
+    //     );
+    //   } else if (this.searchText) {
+    //     return this.products.filter((item) =>
+    //       item.title.toLowerCase().includes(this.searchText.toLowerCase())
+    //     );
+    //   }
 
-      return this.products;
-    },
+    //   return this.products;
+    // },
 
     ...mapGetters('productsModules', [
       'products',
@@ -297,6 +343,8 @@ export default {
     this.getProducts();
     this.getAllProducts();
     this.getCart();
+    this.getAllProductsData();
+    this.getRenderProducts();
   }
 };
 </script>

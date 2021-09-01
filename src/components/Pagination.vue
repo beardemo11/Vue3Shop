@@ -1,35 +1,35 @@
 <template>
   <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
-      <li class="page-item" :class="{ disabled: !pages.has_pre }">
-        <a
-          class="page-link"
-          href="#"
-          aria-label="Previous"
-          @click.prevent="updatePage(pages.current_page - 1)"
-        >
+      <li class="page-item" :class="{ disabled: !paginationData.has_pre }">
+        <button type="button" class="page-link" @click="changePage('pre')">
           <span aria-hidden="true">&laquo;</span>
-        </a>
+        </button>
       </li>
       <li
         class="page-item"
-        v-for="page in pages.total_pages"
+        v-for="page in paginationData.total_pages"
         :key="page"
-        :class="{ active: page === pages.current_page }"
+        :class="{ active: page === paginationData.current_page }"
       >
-        <a class="page-link" href="#" @click.prevent="updatePage(page)">{{
-          page
-        }}</a>
-      </li>
-      <li class="page-item" :class="{ disabled: !pages.has_next }">
-        <a
+        <button
+          type="button"
           class="page-link"
-          href="#"
+          @click="changePage(page)"
+          :disabled="page === paginationData.current_page"
+        >
+          {{ page }}
+        </button>
+      </li>
+      <li class="page-item" :class="{ disabled: !paginationData.has_next }">
+        <button
+          type="button"
+          class="page-link"
           aria-label="Next"
-          @click.prevent="updatePage(pages.current_page + 1)"
+          @click="changePage('next')"
         >
           <span aria-hidden="true">&raquo;</span>
-        </a>
+        </button>
       </li>
     </ul>
   </nav>
@@ -37,10 +37,17 @@
 
 <script>
 export default {
-  props: ['pages'],
+  emits: ['getData'],
+  props: ['paginationData'],
   methods: {
-    updatePage (page) {
-      this.$emit('emit-page', page);
+    changePage (page) {
+      let toPage = page;
+      if (page === 'next') {
+        toPage = this.paginationData.current_page + 1;
+      } else if (page === 'pre') {
+        toPage = this.paginationData.current_page - 1;
+      }
+      this.$emit('getData', toPage);
     }
   }
 };
