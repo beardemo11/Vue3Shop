@@ -44,7 +44,7 @@
       </tr>
     </tbody>
   </table>
-  <Pagination :pages="pagination" @emit-page="getProducts" />
+  <Pagination :paginationData="pagination" @getData="getProducts" />
   <ProductModal
     ref="productModal"
     :product="tempProduct"

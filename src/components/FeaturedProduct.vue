@@ -154,7 +154,6 @@ SwiperCore.use([Autoplay, Pagination]);
 
 export default {
   components: { Swiper, SwiperSlide },
-  inject: ['reload'],
   data () {
     return {
       options: {

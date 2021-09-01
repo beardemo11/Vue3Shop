@@ -3,6 +3,7 @@
   <table class="table mt-4">
     <thead>
       <tr>
+        <th>訂單編號</th>
         <th>購買時間</th>
         <th>Email</th>
         <th>購買款項</th>
@@ -14,6 +15,7 @@
     <tbody>
       <template v-for="(item, key) in orders" :key="key">
         <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }">
+          <td>{{ item.id }}</td>
           <td>{{ $filters.date(item.create_at) }}</td>
           <td><span v-text="item.user.email" v-if="item.user"></span></td>
           <td>
@@ -66,7 +68,7 @@
     @update-paid="updatePaid"
   ></OrderModal>
   <DelModal :item="tempOrder" ref="delModal" @del-item="delOrder"></DelModal>
-  <Pagination :pages="pagination" @emit-pages="getOrders"></Pagination>
+  <Pagination :paginationData="pagination" @getData="getOrders"></Pagination>
 </template>
 
 <script>

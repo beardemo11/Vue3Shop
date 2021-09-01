@@ -8,7 +8,7 @@
           <li class="pb-3">
             <a
               href="#"
-              @click="changeCategories('')"
+              @click.prevent="changeCategories('')"
               class="
                 collapsed
                 d-flex
@@ -209,8 +209,10 @@ export default {
           this.resultProduct = res.data.products.filter(
             (item) => item.category !== 'Banner'
           );
+
           this.getPaginationData();
           this.getRenderProducts();
+          this.changeCategories(this.$route.query.productCategory);
         }
       });
     },
@@ -243,15 +245,19 @@ export default {
     },
     changeCategories (cate) {
       this.filterText = cate;
+      console.log(this.resultProduct);
       this.renderProducts = [];
       this.resultProduct.forEach((item, index) => {
         if (cate === item.category) {
+          console.log('a');
           this.renderProducts.push(item);
           this.getPaginationData(1, this.renderProducts);
         } else if (!cate) {
           this.getRenderProducts();
+          console.log('ab');
         }
       });
+      console.log(cate);
     },
 
     ...mapActions('productsModules', ['getProducts']),
