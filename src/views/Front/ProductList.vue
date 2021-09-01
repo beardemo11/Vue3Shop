@@ -5,7 +5,7 @@
       <div class="col-lg-3">
         <h1 class="h2 pb-4 fw-bold">韓國旅遊景點</h1>
         <ul class="list-unstyled templatemo-accordion">
-          <li class="pb-3" @click="filterText = ''">
+          <li class="pb-3" @click="changeCategories('')">
             <a
               class="
                 collapsed
@@ -23,7 +23,7 @@
             class="pb-3"
             v-for="item in categories"
             :key="item"
-            @click="filterText = item"
+            @click="changeCategories(item)"
             v-show="item != 'Banner'"
           >
             <a
@@ -275,11 +275,10 @@ export default {
           this.renderProducts.push(item);
         }
       });
-      console.log(page);
     },
-    getPaginationData (page = 1) {
+    getPaginationData (page = 1, results = this.resultProduct) {
       const pageData = {};
-      pageData.total_pages = Math.ceil(this.resultProduct.length / 10);
+      pageData.total_pages = Math.ceil(results.length / 10);
       pageData.current_page = page;
       if (pageData.current_page + 1 > pageData.total_pages) {
         pageData.has_next = false;
@@ -293,9 +292,17 @@ export default {
       }
       this.paginationData = pageData;
     },
-    updatePage (page) {
-      this.page = page;
-      window.scrollTo(0, 0);
+    changeCategories (cate) {
+      this.filterText = cate;
+      this.renderProducts = [];
+      this.resultProduct.forEach((item, index) => {
+        if (cate === item.category) {
+          this.renderProducts.push(item);
+          this.getPaginationData(1, this.renderProducts);
+        } else if (!cate) {
+          this.getRenderProducts();
+        }
+      });
     },
 
     ...mapActions('productsModules', ['getProducts']),
