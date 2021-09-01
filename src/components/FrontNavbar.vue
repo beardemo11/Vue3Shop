@@ -82,7 +82,14 @@
               <a class="nav-link fw-bold" href="#/product_list">商品列表</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link fw-bold" href="about.html">訂單查詢</a>
+              <a
+                class="nav-link fw-bold"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#OrderFormOffcanvas"
+                aria-controls="OrderFormOffcanvas"
+                href="OrderForm"
+                >訂單查詢</a
+              >
             </li>
           </ul>
         </div>
@@ -155,6 +162,7 @@
           </a>
           <CartOffcanvas />
           <FavoriteOffcanvas />
+          <OrderSearchOffcanvas />
         </div>
       </div>
     </div>
@@ -166,9 +174,10 @@
 import { mapGetters, mapActions } from 'vuex';
 import CartOffcanvas from '@/components/CartOffcanvas.vue';
 import FavoriteOffcanvas from '@/components/FavoriteOffcanvas.vue';
+import OrderSearchOffcanvas from '@/components/OrderSearchOffcanvas.vue';
 
 export default {
-  components: { CartOffcanvas, FavoriteOffcanvas },
+  components: { CartOffcanvas, FavoriteOffcanvas, OrderSearchOffcanvas },
 
   methods: {
     ...mapActions('cartModules', ['getCart']),

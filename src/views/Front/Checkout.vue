@@ -171,10 +171,13 @@ export default {
       this.$http.post(url, { data: order }).then((res) => {
         if (res.data.success) {
           const orderId = res.data.orderId;
-          this.$router.push(`/orderForm/${orderId}`);
           this.$swal({
             title: '建立訂單成功',
             icon: 'success'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.$router.push(`/orderForm/${orderId}`);
+            }
           });
         } else {
           this.$swal({
