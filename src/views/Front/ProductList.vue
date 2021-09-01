@@ -17,7 +17,9 @@
                 text-decoration-none
                 fw-bold
               "
-              :class="{ 'text-success': filterText === '' }"
+              :class="{
+                'text-success': filterText === '' || filterText === undefined
+              }"
               >全部景點
             </a>
           </li>
@@ -245,16 +247,13 @@ export default {
     },
     changeCategories (cate) {
       this.filterText = cate;
-      console.log(this.resultProduct);
       this.renderProducts = [];
       this.resultProduct.forEach((item, index) => {
         if (cate === item.category) {
-          console.log('a');
           this.renderProducts.push(item);
           this.getPaginationData(1, this.renderProducts);
         } else if (!cate) {
           this.getRenderProducts();
-          console.log('ab');
         }
       });
       console.log(cate);
@@ -265,34 +264,6 @@ export default {
     ...mapActions('favoriteModules', ['getFavorite'])
   },
   computed: {
-    // filterCategory () {
-    //   if (this.filterText === '') {
-    //     return this.allProducts.filter((item) => item.category !== 'Banner');
-    //   }
-    //   return this.products.filter((item) => item.category === this.filterText);
-    // },
-    // filterProducts () {
-    //   const allProducts = this.allProducts.filter(
-    //     (item) => item.category !== 'Banner'
-    //   );
-
-    //   if (this.filterText === '' && !this.searchText) {
-    //     return allProducts.filter((item) =>
-    //       item.title.toLowerCase().includes(this.searchText.toLowerCase())
-    //     );
-    //   } else if (!this.searchText) {
-    //     return this.products.filter((item) =>
-    //       this.filterText.includes(item.category)
-    //     );
-    //   } else if (this.searchText) {
-    //     return this.products.filter((item) =>
-    //       item.title.toLowerCase().includes(this.searchText.toLowerCase())
-    //     );
-    //   }
-
-    //   return this.products;
-    // },
-
     ...mapGetters('productsModules', [
       'products',
       'categories',

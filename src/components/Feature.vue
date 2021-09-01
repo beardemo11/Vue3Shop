@@ -11,21 +11,16 @@
                 <div class="aa-promo-left">
                   <div class="aa-promo-banner">
                     <img
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Xyb3MWE8LxZLE9HkIkruMfah4Z62q1QqUomKnwQWsk4OXeU33koeLvXZy7TmNditWPXswGzrh3dWhWx_8GJQvg
-"
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1Xyb3MWE8LxZLE9HkIkruMfah4Z62q1QqUomKnwQWsk4OXeU33koeLvXZy7TmNditWPXswGzrh3dWhWx_8GJQvg"
                       alt="img"
                     />
                     <div class="aa-prom-content">
-                      <span>75% Off</span>
-                      <h4>
-                        <router-link
-                          :to="{
-                            path: '/product_list',
-                            query: { productCategory: '釜山' }
-                          }"
-                          ><a href="#">For Women</a>
-                        </router-link>
-                      </h4>
+                      <a href="#" @click.prevent="goToProduct('首爾')">
+                        <h1 class="h1c">首爾</h1></a
+                      >
+                      <h5 class="h5c">
+                        景點包含現代摩天大樓、古廟、景福宮和首爾塔。
+                      </h5>
                     </div>
                   </div>
                 </div>
@@ -41,8 +36,12 @@
                         alt="img"
                       />
                       <div class="aa-prom-content">
-                        <span>Exclusive Item</span>
-                        <h4><a href="#">For Men</a></h4>
+                        <a href="#" @click.prevent="goToProduct('釜山')">
+                          <h1 class="h1c">釜山</h1></a
+                        >
+                        <h5 class="h5c">
+                          以海雲台海灘、梵魚寺和金井山步道聞名。
+                        </h5>
                       </div>
                     </div>
                   </div>
@@ -54,8 +53,12 @@
                         alt="img"
                       />
                       <div class="aa-prom-content">
-                        <span>Sale Off</span>
-                        <h4><a href="#">On Shoes</a></h4>
+                        <a href="#" @click.prevent="goToProduct('濟州市')">
+                          <h1 class="h1c">濟州市</h1></a
+                        >
+                        <h5 class="h5c">
+                          特色包含民俗博物館、亂打秀劇場和海水三溫暖。
+                        </h5>
                       </div>
                     </div>
                   </div>
@@ -67,8 +70,10 @@
                         alt="img"
                       />
                       <div class="aa-prom-content">
-                        <span>New Arrivals</span>
-                        <h4><a href="#">For Kids</a></h4>
+                        <a href="#" @click.prevent="goToProduct('仁川')">
+                          <h1 class="h1c">仁川</h1></a
+                        >
+                        <h5 class="h5c">特色包含大型機場和海灘附近的島嶼。</h5>
                       </div>
                     </div>
                   </div>
@@ -80,8 +85,12 @@
                         alt="img"
                       />
                       <div class="aa-prom-content">
-                        <span>25% Off</span>
-                        <h4><a href="#">For Bags</a></h4>
+                        <a href="#" @click.prevent="goToProduct('慶州市')">
+                          <h1 class="h1c">慶州市</h1></a
+                        >
+                        <h5 class="h5c">
+                          景點包含佛國寺和石窟庵等歷史悠久的新羅王朝遺跡。
+                        </h5>
                       </div>
                     </div>
                   </div>
@@ -103,8 +112,24 @@ export default {
   },
   methods: {
     goToProduct (id) {
-      this.$router.push(`/product_list/Category=${id}`);
+      this.$router.push(`/product_list?productCategory=${id}`);
     }
   }
 };
 </script>
+
+<style scoped>
+.h1c {
+  font-weight: 600;
+  color: white;
+}
+.h5c {
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercas;
+}
+a {
+  text-decoration: none;
+}
+</style>
