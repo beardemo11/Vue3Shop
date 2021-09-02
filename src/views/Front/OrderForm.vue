@@ -107,7 +107,7 @@
             <button
               type="submit"
               class="btn btn-success fw-bold"
-              @change="updatePaid(order.id)"
+              @click="pay(order.id)"
             >
               確認付款
             </button>
@@ -133,20 +133,25 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${this.orderId}`;
       this.$http.get(url).then((res) => {
         if (res.data.success) {
-          console.log(res.data);
           this.order = res.data.order;
         }
       });
     },
-    updatePaid (item) {
-      this.isLoading = true;
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${item.id}`;
-      const paid = { is_paid: item.is_paid };
-      this.$http.put(api, { data: paid }).then((response) => {
-        this.isLoading = false;
-        this.getOrders(this.currentPage);
-        this.$httpMsgState(response, '更新付款狀態');
-      });
+    pay (id) {
+      this.$http
+        .post(
+          `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${id}`
+        )
+        .then((res) => {
+          if (res.data.success) {
+            // const { message } = res.data;
+            // console.log(message);
+            this.$swal({ title: '付款完成!', icon: 'success' });
+            this.getOrder(id);
+          } else {
+            this.$swal({ title: '付款失敗!', icon: 'error' });
+          }
+        });
     }
   },
   created () {
