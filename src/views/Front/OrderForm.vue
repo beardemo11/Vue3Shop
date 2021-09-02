@@ -104,7 +104,11 @@
             </ul>
           </div>
           <div class="py-4 text-end d-none d-lg-block">
-            <button type="submit" class="btn btn-success fw-bold">
+            <button
+              type="submit"
+              class="btn btn-success fw-bold"
+              @change="updatePaid(order.id)"
+            >
               確認付款
             </button>
           </div>
@@ -132,6 +136,16 @@ export default {
           console.log(res.data);
           this.order = res.data.order;
         }
+      });
+    },
+    updatePaid (item) {
+      this.isLoading = true;
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${item.id}`;
+      const paid = { is_paid: item.is_paid };
+      this.$http.put(api, { data: paid }).then((response) => {
+        this.isLoading = false;
+        this.getOrders(this.currentPage);
+        this.$httpMsgState(response, '更新付款狀態');
       });
     }
   },
