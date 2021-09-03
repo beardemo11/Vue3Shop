@@ -63,9 +63,12 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <a href="#" class="h3 text-decoration-none fw-bold">{{
-                    item.title
-                  }}</a>
+                  <a
+                    href="#"
+                    class="h3 text-decoration-none fw-bold"
+                    @click.prevent="goToProduct(item.id)"
+                    >{{ item.title }}</a
+                  >
                   <ul
                     class="
                       w-100
