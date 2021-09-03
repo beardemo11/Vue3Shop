@@ -1,4 +1,4 @@
 // vue.config.js
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/eric-Vue3Shop/' : '/'
+  publicPath: process.env.NODE_ENV === 'production' ? '//Vue3Shop/dist/' : '/'
 };
