@@ -13,7 +13,7 @@
           <div class="card">
             <div class="card-body">
               <h1 class="h2 fw-bold">{{ product.title }}</h1>
-              <p class="h3 py-2 fw-bold">${{ product.price }}</p>
+              <p class="h3 py-2 fw-bold">NT ${{ product.price }}</p>
               <!-- <p class="py-2">
                 <i class="fa fa-star text-warning"></i>
                 <i class="fa fa-star text-warning"></i>
@@ -89,10 +89,10 @@
                     type="submit"
                     class="btn btn-success btn-lg fw-bold"
                     name="submit"
-                    value="buy"
-                    @click.prevent="changeRoute('/cartList')"
+                    value="addtocard"
+                    @click.prevent="addCart(id, cartSelect)"
                   >
-                    直接購買
+                    加入購物車
                   </button>
                 </div>
                 <div class="col d-grid">
@@ -100,10 +100,10 @@
                     type="submit"
                     class="btn btn-success btn-lg fw-bold"
                     name="submit"
-                    value="addtocard"
-                    @click.prevent="addCart(id, cartSelect)"
+                    value="buy"
+                    @click.prevent="toggleFavorite(product)"
                   >
-                    加入購物車
+                    加入我的最愛
                   </button>
                 </div>
               </div>
@@ -159,20 +159,44 @@ export default {
         this.cartSelect--;
       }
     },
+    toggleFavorite (product) {
+      const storageKey = 'favoriteData';
+      const favoriteProducts =
+        JSON.parse(localStorage.getItem('favoriteData')) || [];
+      if (favoriteProducts) {
+        const idx = favoriteProducts.findIndex(
+          (item) => item.id === product.id
+        );
+        if (idx === -1) {
+          localStorage.setItem(
+            storageKey,
+            JSON.stringify([...favoriteProducts, product])
+          );
+          this.isFavorite = true;
+        } else {
+          favoriteProducts.splice(idx, 1);
+          localStorage.setItem(storageKey, JSON.stringify(favoriteProducts));
+          this.isFavorite = false;
+        }
+      } else {
+        this.setFavoriteProduct(storageKey, JSON.stringify([product]));
+        this.isFavorite = true;
+      }
+      this.getFavorite();
+      this.$swal({
+        title: `${this.isFavorite ? '加入' : '移除'}我的最愛`,
+        icon: 'success'
+      });
+    },
+
     changeRoute (router) {
       this.$router.push(router);
     },
 
-    ...mapActions('productsModules', ['getProducts'])
+    ...mapActions('productsModules', ['getProducts']),
+    ...mapActions('favoriteModules', ['getFavorite'])
   },
   computed: {
-    // otherFilter () {
-    //   return this.products.filter((item) => {
-    //     if (item.category === this.product.category) {
-    //       return item.category === this.product.category;
-    //     }
-    //   });
-    // },
     ...mapGetters('productsModules', ['products'])
   },
   created () {

@@ -9,6 +9,15 @@
   <div class="container">
     <div class="row mt-4">
       <div class="col-md-12">
+        <div class="text-end">
+          <a
+            @click.prevent="deleteAllCart"
+            v-if="cartLength > 0"
+            class="btn btn-danger"
+          >
+            刪除全部
+          </a>
+        </div>
         <table class="table align-middle text-center">
           <thead>
             <tr>
@@ -91,6 +100,7 @@
                     type="button"
                     class="btn btn-secondary text-white coupon"
                     @click="addCoupon"
+                    :disabled="cartLength < 1"
                   >
                     <i class="bi bi-gift text-white me-2"></i>優惠碼
                   </button>
@@ -120,6 +130,7 @@
                   ><i class="bi bi-chevron-left"></i> 繼續購物
                 </a>
               </td>
+
               <td colspan="2" align="right">
                 <a
                   href="#/checkout"
@@ -163,26 +174,46 @@ export default {
     removeCartItem (id) {
       this.$store.dispatch('cartModules/removeCartItem', id);
     },
+    deleteAllCart () {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`;
+
+      this.$swal
+        .fire({
+          title: '確定刪除購物車?',
+          text: '您將無法還原此內容！',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: '是的, 確定刪除!'
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            this.$swal.fire('Deleted!', '已經刪除購物車', 'success');
+            this.$http.delete(url).then((res) => {
+              this.getCart();
+            });
+          }
+        });
+    },
     addCoupon () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`;
       const coupon = {
         code: this.coupon_code
       };
-      this.$http.post(url, { data: coupon }).then((res) => {
-        if (res.data.success) {
-          this.getCart();
-          this.coupon_code = '';
-          this.$swal({
-            title: '已套用優惠卷',
-            icon: 'success'
-          });
-        } else {
-          this.$swal({
-            title: '找不到優惠卷',
-            icon: 'error'
-          });
-        }
-      });
+      if (this.coupon_code !== '') {
+        this.$http.post(url, { data: coupon }).then((res) => {
+          if (res.data.success) {
+            this.getCart();
+            this.coupon_code = '';
+            this.$swal({ title: '已套用優惠卷', icon: 'success' });
+          } else {
+            this.$swal({ title: '找不到優惠卷', icon: 'error' });
+          }
+        });
+      } else {
+        this.$swal({ title: '請輸入優惠碼!', icon: 'error' });
+      }
     },
 
     ...mapActions('cartModules', ['getCart']),

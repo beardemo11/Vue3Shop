@@ -39,7 +39,7 @@
                         <a
                           class="btn btn-success text-white"
                           href="#"
-                          @click.prevent="addFavorite(item)"
+                          @click.prevent="toggleFavorite(item)"
                           ><i class="far fa-heart"></i
                         ></a>
                       </li>
@@ -135,7 +135,7 @@
                       <i class="text-muted fa fa-star"></i>
                     </li>
                   </ul>
-                  <p class="text-center mb-0 fw-bold">${{ item.price }}</p>
+                  <p class="text-center mb-0 fw-bold">NT ${{ item.price }}</p>
                 </div>
               </div>
             </div>
@@ -195,8 +195,38 @@ export default {
         icon: 'success'
       });
     },
+    toggleFavorite (product) {
+      const storageKey = 'favoriteData';
+      const favoriteProducts =
+        JSON.parse(localStorage.getItem('favoriteData')) || [];
+      if (favoriteProducts) {
+        const idx = favoriteProducts.findIndex(
+          (item) => item.id === product.id
+        );
+        if (idx === -1) {
+          localStorage.setItem(
+            storageKey,
+            JSON.stringify([...favoriteProducts, product])
+          );
+          this.isFavorite = true;
+        } else {
+          favoriteProducts.splice(idx, 1);
+          localStorage.setItem(storageKey, JSON.stringify(favoriteProducts));
+          this.isFavorite = false;
+        }
+      } else {
+        this.setFavoriteProduct(storageKey, JSON.stringify([product]));
+        this.isFavorite = true;
+      }
+      this.getFavorite();
+      this.$swal({
+        title: `${this.isFavorite ? '加入' : '移除'}我的最愛`,
+        icon: 'success'
+      });
+    },
 
-    ...mapActions('productsModules', ['getProducts'])
+    ...mapActions('productsModules', ['getProducts']),
+    ...mapActions('favoriteModules', ['getFavorite'])
   },
   watch: {
     $route (to, from) {

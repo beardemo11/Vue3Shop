@@ -2,9 +2,41 @@ export default {
   namespaced: true,
   state: {
     favorites: {},
-    favoritesLength: 0
+    favoritesLength: 0,
+    isFavorite: false
   },
+
   actions: {
+    setFavoriteProduct (key, value) {
+      localStorage.setItem(key, value);
+    },
+    toggleFavorite (context, product) {
+      const storageKey = 'favoriteData';
+
+      const favoriteProducts =
+        JSON.parse(localStorage.getItem('favoriteData')) || [];
+      if (favoriteProducts) {
+        const idx = favoriteProducts.findIndex(
+          (item) => item.id === product.id
+        );
+        if (idx === -1) {
+          localStorage.setItem(
+            storageKey,
+            JSON.stringify([...favoriteProducts, product])
+          );
+          this.isFavorite = true;
+        } else {
+          favoriteProducts.splice(idx, 1);
+          localStorage.setItem(storageKey, JSON.stringify(favoriteProducts));
+          this.isFavorite = false;
+        }
+      } else {
+        this.setFavoriteProduct(storageKey, JSON.stringify([product]));
+        this.isFavorite = true;
+      }
+
+      context.dispatch('getFavorite');
+    },
     getFavorite (context) {
       const favoriteData =
         JSON.parse(localStorage.getItem('favoriteData')) || [];

@@ -108,7 +108,7 @@
                       <a
                         class="btn btn-success text-white"
                         href="#"
-                        @click.prevent="addFavorite(item)"
+                        @click.prevent="toggleFavorite(item)"
                         ><i class="far fa-heart"></i
                       ></a>
                     </li>
@@ -146,7 +146,23 @@
                       <i class="text-muted fa fa-star"></i>
                     </li>
                   </ul>
-                  <p class="text-center mb-0 fw-bold">NT ${{ item.price }}</p>
+                  <div
+                    class="d-flex justify-content-center"
+                    v-if="item.price === item.origin_price"
+                  >
+                    <p class="text-center mb-0 fw-bold">
+                      NT$ {{ $filters.currency(item.price) }}
+                    </p>
+                  </div>
+
+                  <div class="d-flex justify-content-between" v-else>
+                    <del class="text-muted fs-9"
+                      >NT$ {{ $filters.currency(item.origin_price) }}
+                    </del>
+                    <p class="text-start mb-0 fw-bold">
+                      NT$ {{ $filters.currency(item.price) }}
+                    </p>
+                  </div>
                 </a>
               </div>
             </div>
@@ -184,7 +200,9 @@ export default {
       filterText: '',
       searchText: '',
       paginationData: {},
-      renderProducts: []
+      renderProducts: [],
+      isFavorite: false,
+      favoriteList: JSON.parse(localStorage.getItem('favoriteData')) || []
     };
   },
   components: { Pagination },
@@ -201,8 +219,39 @@ export default {
       this.$swal({ title: '加入購物車成功', icon: 'success' });
     },
     addFavorite (product) {
-      this.$store.dispatch('favoriteModules/addToFavorite', product);
+      this.$store.dispatch('favoriteModules/toggleFavorite', product);
       this.$swal({ title: '已加入我的最愛', icon: 'success' });
+    },
+    toggleFavorite (product) {
+      const storageKey = 'favoriteData';
+
+      const favoriteProducts =
+        JSON.parse(localStorage.getItem('favoriteData')) || [];
+      if (favoriteProducts) {
+        const idx = favoriteProducts.findIndex(
+          (item) => item.id === product.id
+        );
+        if (idx === -1) {
+          localStorage.setItem(
+            storageKey,
+            JSON.stringify([...favoriteProducts, product])
+          );
+          this.isFavorite = true;
+        } else {
+          favoriteProducts.splice(idx, 1);
+          localStorage.setItem(storageKey, JSON.stringify(favoriteProducts));
+          this.isFavorite = false;
+        }
+      } else {
+        this.setFavoriteProduct(storageKey, JSON.stringify([product]));
+        this.isFavorite = true;
+      }
+      this.getFavorite();
+
+      this.$swal({
+        title: `${this.isFavorite ? '加入' : '移除'}我的最愛`,
+        icon: 'success'
+      });
     },
     getAllProductsData () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
@@ -256,7 +305,6 @@ export default {
           this.getRenderProducts();
         }
       });
-      console.log(cate);
     },
 
     ...mapActions('productsModules', ['getProducts']),
