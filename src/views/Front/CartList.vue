@@ -88,11 +88,11 @@
           <tfoot>
             <tr>
               <td colspan="3" class="pb35">
-                <div class="input-group">
+                <div class="input-group igw">
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="輸入優惠碼"
+                    placeholder="折扣碼FlyGO"
                     aria-label="coupons-btn"
                     aria-describedby="coupons-btn"
                     v-model="coupon_code"
@@ -108,11 +108,20 @@
               </td>
 
               <td colspan="2" class="text-end fw-bold align-baseline">
+                <p class="display-10 fw-bold">
+                  小計 : NT ${{ $filters.currency(cart.total) }}
+                </p>
+                <p class="display-10 fw-bold">
+                  折扣 : NT ${{
+                    $filters.currency(cart.total - cart.final_total)
+                  }}
+                </p>
+
                 <del v-if="cart.final_total !== cart.total"
-                  >總金額 NT ${{ $filters.currency(cart.total) }}</del
+                  >總金額 : NT ${{ $filters.currency(cart.total) }}</del
                 >
                 <p v-else class="display-10 fw-bold">
-                  總金額 NT ${{ $filters.currency(cart.total) }}
+                  總金額 : NT ${{ $filters.currency(cart.total) }}
                 </p>
               </td>
             </tr>
@@ -120,7 +129,7 @@
               <td colspan="5" class="text-end text-danger">
                 <p class="text-danger mb-2 fw-bold">已套用優惠卷</p>
                 <p class="display-10 fw-bold">
-                  折扣後總金額 NT ${{ $filters.currency(cart.final_total) }}
+                  折扣後總金額 : NT ${{ $filters.currency(cart.final_total) }}
                 </p>
               </td>
             </tr>
@@ -239,5 +248,8 @@ export default {
 }
 .pb35 {
   padding-bottom: 6rem;
+}
+.igw {
+  width: 115%;
 }
 </style>

@@ -188,41 +188,16 @@ export default {
       this.$store.dispatch('cartModules/addCart', { id, qty });
       this.$swal({ title: '加入購物車成功', icon: 'success' });
     },
-    addFavorite (product) {
-      this.$store.dispatch('favoriteModules/addToFavorite', product);
-      this.$swal({
-        title: '已加入我的最愛',
-        icon: 'success'
-      });
-    },
     toggleFavorite (product) {
-      const storageKey = 'favoriteData';
-      const favoriteProducts =
-        JSON.parse(localStorage.getItem('favoriteData')) || [];
-      if (favoriteProducts) {
-        const idx = favoriteProducts.findIndex(
-          (item) => item.id === product.id
-        );
-        if (idx === -1) {
-          localStorage.setItem(
-            storageKey,
-            JSON.stringify([...favoriteProducts, product])
-          );
-          this.isFavorite = true;
-        } else {
-          favoriteProducts.splice(idx, 1);
-          localStorage.setItem(storageKey, JSON.stringify(favoriteProducts));
-          this.isFavorite = false;
-        }
-      } else {
-        this.setFavoriteProduct(storageKey, JSON.stringify([product]));
-        this.isFavorite = true;
-      }
-      this.getFavorite();
-      this.$swal({
-        title: `${this.isFavorite ? '加入' : '移除'}我的最愛`,
-        icon: 'success'
-      });
+      this.$store
+        .dispatch('favoriteModules/toggleFavorite', product)
+        .then((response) => {
+          this.isFavorite = response;
+          this.$swal({
+            title: `${this.isFavorite ? '加入' : '移除'}我的最愛`,
+            icon: 'success'
+          });
+        });
     },
 
     ...mapActions('productsModules', ['getProducts']),

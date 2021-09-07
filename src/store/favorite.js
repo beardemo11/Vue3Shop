@@ -36,6 +36,7 @@ export default {
       }
 
       context.dispatch('getFavorite');
+      return this.isFavorite;
     },
     getFavorite (context) {
       const favoriteData =
