@@ -109,14 +109,21 @@
                         class="btn btn-success text-white"
                         href="#"
                         @click.prevent="toggleFavorite(item)"
-                        ><i class="far fa-heart"></i
+                        ><i
+                          class="far fa-heart"
+                          :class="[
+                            this.favoriteList.includes(item.id)
+                              ? 'bi-heart-fill'
+                              : 'bi-heart'
+                          ]"
+                        ></i
                       ></a>
                     </li>
                     <li>
                       <a
                         class="btn btn-success text-white mt-2"
                         href="#"
-                        @click.prevent="getProduct(item.id)"
+                        @click.prevent="goToProduct(item.id)"
                         ><i class="far fa-eye"></i
                       ></a>
                     </li>
@@ -134,7 +141,7 @@
               <div class="card-body">
                 <a
                   href="#"
-                  @click.prevent="getProduct(item.id)"
+                  @click.prevent="goToProduct(item.id)"
                   class="h3 text-decoration-none fw-bold"
                   >{{ item.title }}
                   <ul class="list-unstyled d-flex justify-content-center mb-1">
@@ -202,16 +209,13 @@ export default {
       paginationData: {},
       renderProducts: [],
       isFavorite: false,
-      favoriteList: JSON.parse(localStorage.getItem('favoriteData')) || []
+      favoriteList: []
     };
   },
   components: { Pagination },
 
   methods: {
-    getAllProducts (page = 1) {
-      this.$store.dispatch('productsModules/getAllProducts', page);
-    },
-    getProduct (id) {
+    goToProduct (id) {
       this.$router.push(`/product/${id}`);
     },
     addCart (id, qty = 1) {
@@ -222,6 +226,7 @@ export default {
       this.$store
         .dispatch('favoriteModules/toggleFavorite', product)
         .then((response) => {
+          this.getFavorites();
           this.isFavorite = response;
           this.$swal({
             title: `${this.isFavorite ? '加入' : '移除'}我的最愛`,
@@ -240,6 +245,7 @@ export default {
           this.getPaginationData();
           this.getRenderProducts();
           this.changeCategories(this.$route.query.productCategory);
+          this.getFavorites();
         }
       });
     },
@@ -282,24 +288,26 @@ export default {
         }
       });
     },
+    getFavorites () {
+      this.favoriteList = [];
+      this.favorites.forEach((item) => {
+        this.favoriteList.push(item.id);
+      });
+    },
 
-    ...mapActions('productsModules', ['getProducts']),
-    ...mapActions('cartModules', ['getCart']),
     ...mapActions('favoriteModules', ['getFavorite'])
   },
+
   computed: {
     ...mapGetters('productsModules', [
       'products',
       'categories',
       'allProducts',
       'pagination'
-    ])
-    // ...mapGetters('cartModules', ['cart'])
+    ]),
+    ...mapGetters('favoriteModules', ['favorites', 'favoritesLength'])
   },
   created () {
-    this.getProducts();
-    this.getAllProducts();
-    this.getCart();
     this.getAllProductsData();
     this.getRenderProducts();
   }

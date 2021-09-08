@@ -40,7 +40,14 @@
                           class="btn btn-success text-white"
                           href="#"
                           @click.prevent="toggleFavorite(item)"
-                          ><i class="far fa-heart"></i
+                          ><i
+                            class="far fa-heart"
+                            :class="[
+                              this.favoriteList.includes(item.id)
+                                ? 'bi-heart-fill'
+                                : 'bi-heart'
+                            ]"
+                          ></i
                         ></a>
                       </li>
                       <li>
@@ -171,14 +178,17 @@ export default {
           },
           1024: { slidesPerView: 4, spaceBetween: 24 }
         }
-      }
+      },
+      favoriteList: []
     };
   },
   computed: {
     hotProducts () {
+      this.getFavorites();
       return this.products.filter((item) => item.content === '熱門景點');
     },
-    ...mapGetters('productsModules', ['products', 'categories'])
+    ...mapGetters('productsModules', ['products', 'categories']),
+    ...mapGetters('favoriteModules', ['favorites', 'favoritesLength'])
   },
   methods: {
     goToProduct (id) {
@@ -199,9 +209,14 @@ export default {
           });
         });
     },
+    getFavorites () {
+      this.favoriteList = [];
+      this.favorites.forEach((item) => {
+        this.favoriteList.push(item.id);
+      });
+    },
 
-    ...mapActions('productsModules', ['getProducts']),
-    ...mapActions('favoriteModules', ['getFavorite'])
+    ...mapActions('productsModules', ['getProducts'])
   },
   watch: {
     $route (to, from) {
