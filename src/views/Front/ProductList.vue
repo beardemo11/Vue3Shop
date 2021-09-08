@@ -50,7 +50,7 @@
 
       <div class="col-lg-9">
         <div class="row">
-          <!-- <div class="col-md-6">
+          <div class="col-md-6">
             <ul class="list-inline shop-top-menu pb-3 pt-1">
               <li class="list-inline-item">
                 <a
@@ -60,29 +60,29 @@
                 </a>
               </li>
             </ul>
-          </div> -->
-          <!-- <div class="col-md-6 pb-4">
+          </div>
+          <div class="col-md-6 pb-4">
             <div class="d-flex">
               <form class="modal-content modal-body border-0 p-0">
                 <div class="input-group mb-2">
                   <input
-                    type="text"
-                    class="form-control"
-                    id="inputModalSearch"
-                    name="q"
-                    placeholder="Search"
+                    type="search"
+                    class="form-control fw-bold"
+                    placeholder="搜尋景點"
                     v-model="searchText"
+                    @keyup.enter="searchProducts(searchText)"
                   />
                   <button
                     type="submit"
                     class="input-group-text bg-success text-light"
+                    @click.prevent="searchProducts(searchText)"
                   >
                     <i class="fa fa-fw fa-search text-white"></i>
                   </button>
                 </div>
               </form>
             </div>
-          </div> -->
+          </div>
         </div>
         <div class="row">
           <div class="col-md-4" v-for="item in renderProducts" :key="item.id">
@@ -293,6 +293,16 @@ export default {
       this.favorites.forEach((item) => {
         this.favoriteList.push(item.id);
       });
+    },
+    searchProducts (searchText) {
+      if (searchText.length > 0) {
+        this.renderProducts = this.resultProduct.filter((item) =>
+          item.title.match(this.searchText.trim())
+        );
+        this.getPaginationData(1, this.renderProducts);
+      } else {
+        this.getAllProductsData();
+      }
     },
 
     ...mapActions('favoriteModules', ['getFavorite'])
