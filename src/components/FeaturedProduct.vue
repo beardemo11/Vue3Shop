@@ -5,7 +5,6 @@
       <div class="row text-left p-2 pb-3">
         <h4 class="fw-bold">熱門景點</h4>
       </div>
-
       <!--Start Carousel Wrapper-->
       <div id="carousel-related-product">
         <swiper
@@ -142,7 +141,23 @@
                       <i class="text-muted fa fa-star"></i>
                     </li>
                   </ul>
-                  <p class="text-center mb-0 fw-bold">NT ${{ item.price }}</p>
+                  <div
+                    class="d-flex justify-content-center"
+                    v-if="item.price === item.origin_price"
+                  >
+                    <p class="text-center mb-0 fw-bold">
+                      NT$ {{ $filters.currency(item.price) }}
+                    </p>
+                  </div>
+
+                  <div class="d-flex justify-content-between" v-else>
+                    <del class="text-muted fs-9"
+                      >NT$ {{ $filters.currency(item.origin_price) }}
+                    </del>
+                    <p class="text-start mb-0 fw-bold">
+                      NT$ {{ $filters.currency(item.price) }}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

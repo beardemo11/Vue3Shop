@@ -56,7 +56,7 @@
                 <a
                   class="h3 text-dark text-decoration-none mr-3 fw-bold"
                   href="#"
-                  >{{ filterText }}
+                >
                 </a>
               </li>
             </ul>

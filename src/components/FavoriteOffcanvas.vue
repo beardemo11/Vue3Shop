@@ -32,7 +32,7 @@
             />
           </div>
           <div class="w-75 ms-3">
-            <h3 class="h6 mb-1 fw-bold">{{ item.title }}</h3>
+            <h3 class="h3 mb-1 fw-bold">{{ item.title }}</h3>
             <p class="fw-bold text-success p1">
               NT ${{ $filters.currency(item.price) }}
             </p>
@@ -46,22 +46,6 @@
                   點我前往
                 </a>
               </div>
-
-              <!-- <button
-                type="button"
-                class="btn btn-outline-info"
-                @click.prevent="getProduct(item.id)"
-              >
-                <i class="far fa-eye"></i>
-              </button> -->
-              <!-- <button
-                type="button"
-                class="btn btn-outline-info"
-                @click.prevent="addCart(item.id)"
-              >
-                <i class="fas fa-cart-plus"></i>
-              </button> -->
-
               <button
                 type="button"
                 class="btn btn-outline-info"
@@ -74,27 +58,6 @@
         </li>
       </ul>
       <p class="py-5 fw-bold" v-else>目前無產品</p>
-      <!-- <div>
-        <div class="offcanvas-footer border">
-          <div class="p-3">
-            <template v-if="favorites.length > 0">
-              <button
-                @click.prevent="changeRoute('/product_list')"
-                type="button"
-                class="btn btn-outline-success btn-lg w-100 mb-3 fw-bold"
-              >
-                繼續選購
-              </button>
-              <a
-                href="#"
-                @click.prevent="changeRoute('/checkout')"
-                class="btn btn-success btn-lg w-100 text-white fw-bold"
-                >直接購買</a
-              >
-            </template>
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>
 </template>
@@ -102,6 +65,8 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 export default {
+  inject: ['reload'], // 使用 inject 注入 reload 变量
+
   data () {
     return {};
   },
@@ -115,6 +80,11 @@ export default {
         favoriteItem: favorite,
         delall
       });
+      this.$swal({
+        title: '移除我的最愛',
+        icon: 'success'
+      });
+      this.reload();
     },
 
     ...mapActions('favoriteModules', ['getFavorite'])
@@ -124,11 +94,9 @@ export default {
   },
   watch: {
     $route (to, from) {
-      this.$router.go(0);
+      this.reload();
     }
-  },
-
-  created () {}
+  }
 };
 </script>
 

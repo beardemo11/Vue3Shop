@@ -21,15 +21,15 @@
             <div class="input-group mb-3">
               <input
                 type="text"
-                class="form-control"
+                class="form-control fw-bold"
                 placeholder="輸入訂單號碼"
                 v-model.trim="orderSearilNumber"
               /><button
-                class="btn btn-outline-success"
+                class="btn btn-success fw-bold"
                 @click="findOrder"
                 type="button"
               >
-                查詢
+                <i class="fa fa-fw fa-search text-white"></i>
               </button>
             </div>
           </div>
@@ -47,33 +47,32 @@ export default {
 
   methods: {
     findOrder () {
-      this.$http
-        .get(
-          `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${this.orderSearilNumber}`
-        )
-        .then((res) => {
-          if (res.data.success) {
-            const { order } = res.data;
-            if (order !== null) {
-              this.$swal({
-                title: '謝謝您的訂購',
-                icon: 'success'
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  this.$router.push(`/orderForm/${order.id}`);
-                }
-              });
-            } else {
-              this.$swal({ title: '查無訂單', icon: 'error' });
+      if (this.orderSearilNumber.length > 0) {
+        this.$http
+          .get(
+            `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order/${this.orderSearilNumber}`
+          )
+          .then((res) => {
+            if (res.data.success) {
+              const { order } = res.data;
+              if (order !== null) {
+                this.$swal({
+                  title: '謝謝您的訂購',
+                  icon: 'success'
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    this.$router.push(`/orderForm/${order.id}`);
+                  }
+                });
+              } else {
+                this.$swal({ title: '查無訂單', icon: 'error' });
+              }
+              this.orderSearilNumber = '';
             }
-            this.orderSearilNumber = '';
-          } else {
-            this.$swal(res.data.message, '', 'error');
-          }
-        })
-        .catch((error) => {
-          this.$swal(error, '', 'error');
-        });
+          });
+      } else {
+        this.$swal({ title: '請輸入訂單號碼', icon: 'error' });
+      }
     }
   }
 };

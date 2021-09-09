@@ -268,7 +268,6 @@ export default {
       this.isLoading = true;
       this.$http.get(url).then((response) => {
         this.products = response.data.products;
-        console.log('products:', response);
         this.isLoading = false;
       });
     },
@@ -284,7 +283,6 @@ export default {
       };
       this.$http.post(url, { data: cart }).then((res) => {
         this.status.loadingItem = '';
-        console.log(res);
         this.getCart();
       });
     },
@@ -292,7 +290,6 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
       this.isLoading = true;
       this.$http.get(url).then((response) => {
-        console.log(response);
         this.cart = response.data.data;
         this.isLoading = false;
       });
@@ -306,7 +303,6 @@ export default {
         qty: item.qty
       };
       this.$http.put(url, { data: cart }).then((res) => {
-        console.log(res);
         this.status.loadingItem = '';
         this.getCart();
       });
@@ -337,9 +333,7 @@ export default {
     createOrder () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`;
       const order = this.form;
-      this.$http.post(url, { data: order }).then((res) => {
-        console.log(res);
-      });
+      this.$http.post(url, { data: order }).then((res) => {});
     }
   },
   created () {

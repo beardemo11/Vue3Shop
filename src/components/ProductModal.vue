@@ -8,7 +8,6 @@
     aria-hidden="true"
     ref="modal"
   >
-    <!-- 請同學自行新增 v-model -->
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content border-0">
         <div class="modal-header bg-dark text-white">
@@ -48,7 +47,6 @@
                 />
               </div>
               <img class="img-fluid" alt="" :src="tempProduct.imageUrl" />
-              <!-- 延伸技巧，多圖 -->
               <div class="mt-5">
                 <div class="mb-3 input-group">
                   <input
@@ -220,7 +218,6 @@ export default {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`;
       this.$http.post(api, formData).then((response) => {
         if (response.data.success) {
-          console.log(response.data);
           this.tempProduct.imageUrl = response.data.imageUrl;
         }
       });

@@ -32,7 +32,7 @@
             />
           </div>
           <div class="w-75 ms-3">
-            <h3 class="h6 mb-1 fw-bold">{{ item.product.title }}</h3>
+            <h3 class="h3 mb-1 fw-bold">{{ item.product.title }}</h3>
             <p class="fw-bold text-success p1">
               NT ${{ $filters.currency(item.product.price) }}
             </p>

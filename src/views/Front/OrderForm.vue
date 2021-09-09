@@ -144,8 +144,6 @@ export default {
         )
         .then((res) => {
           if (res.data.success) {
-            // const { message } = res.data;
-            // console.log(message);
             this.$swal({ title: '付款完成!', icon: 'success' });
             this.getOrder(id);
           } else {

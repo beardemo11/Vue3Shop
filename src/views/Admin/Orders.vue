@@ -129,7 +129,6 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`;
       this.isLoading = true;
       this.$http.delete(url).then((response) => {
-        console.log(response);
         const delComponent = this.$refs.delModal;
         delComponent.hideModal();
         this.getOrders(this.currentPage);

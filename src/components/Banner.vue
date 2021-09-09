@@ -11,7 +11,6 @@
         disableOnInteraction: false
       }"
       :navigation="false"
-      class="mySwiper"
     >
       <SwiperSlide v-for="item in banner" :key="item.id">
         <div
@@ -33,16 +32,12 @@
 
 <script scoped>
 import { mapGetters, mapActions } from 'vuex';
-
-// Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
-// Import Swiper styles
 import 'swiper/swiper.scss';
 import 'swiper/components/pagination/pagination.min.css';
 import 'swiper/components/navigation/navigation.min.css';
-// import Swiper core and required modules
 import SwiperCore, { Autoplay, Pagination, Navigation } from 'swiper/core';
-// install Swiper modules
+
 SwiperCore.use([Autoplay, Pagination, Navigation]);
 export default {
   components: {
@@ -71,9 +66,6 @@ export default {
   width: 100%;
 }
 
-.banner {
-  margin-top: 60px;
-}
 .img-bg {
   background-size: cover;
   background-position: center center;
