@@ -150,6 +150,7 @@
             </tr>
           </tfoot>
         </table>
+        <div class="pb35"></div>
       </div>
     </div>
   </div>
@@ -170,6 +171,7 @@ export default {
     },
     removeCartItem (id) {
       this.$store.dispatch('cartModules/removeCartItem', id);
+      this.$swal({ title: '刪除成功!', icon: 'success' });
     },
     deleteAllCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`;
@@ -179,7 +181,7 @@ export default {
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: '是的, 確定刪除!',
-        icon: 'success'
+        icon: 'warning'
       }).then((result) => {
         if (result.isConfirmed) {
           this.$swal.fire('Deleted!', '已經刪除購物車', 'success');
@@ -229,5 +231,8 @@ export default {
 <style scoped>
 .coupon {
   background-color: #59ab6e;
+}
+.pb35 {
+  padding-bottom: 8rem;
 }
 </style>

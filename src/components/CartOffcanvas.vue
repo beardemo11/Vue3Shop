@@ -102,6 +102,7 @@ export default {
     },
     removeCartItem (id) {
       this.$store.dispatch('cartModules/removeCartItem', id);
+      this.$swal({ title: '刪除成功!', icon: 'success' });
     },
     changeRoute (router) {
       this.$router.push(router);

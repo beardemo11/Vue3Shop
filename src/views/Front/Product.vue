@@ -25,7 +25,7 @@
                     <li class="list-inline-item text-right fw-bold">
                       數量
                       <input
-                        v-model="cartSelect"
+                        v-model="cartQty"
                         type="hidden"
                         name="product-quanity"
                         id="product-quanity"
@@ -41,7 +41,7 @@
                     </li>
                     <li class="list-inline-item">
                       <span class="badge bg-secondary" id="var-value">{{
-                        cartSelect
+                        cartQty
                       }}</span>
                     </li>
                     <li class="list-inline-item">
@@ -62,7 +62,7 @@
                     class="btn btn-success btn-lg fw-bold"
                     name="submit"
                     value="addtocard"
-                    @click.prevent="addCart(id, cartSelect)"
+                    @click.prevent="addCart(id, cartQty)"
                   >
                     加入購物車
                   </button>
@@ -75,6 +75,15 @@
                     value="buy"
                     @click.prevent="toggleFavorite(product)"
                   >
+                    <i
+                      class="far fa-heart"
+                      :class="[
+                        this.favoriteList.includes(id)
+                          ? 'bi-heart-fill'
+                          : 'bi-heart'
+                      ]"
+                    ></i>
+
                     加入我的最愛
                   </button>
                 </div>
@@ -99,7 +108,8 @@ export default {
     return {
       product: {},
       id: '',
-      cartSelect: 1
+      cartQty: 1,
+      favoriteList: []
     };
   },
   methods: {
@@ -121,14 +131,14 @@ export default {
       });
     },
     addQty () {
-      this.cartSelect++;
+      this.cartQty++;
     },
     minusQty () {
-      if (this.cartSelect <= 1) {
+      if (this.cartQty <= 1) {
         this.$swal({ title: '數量需大於1', icon: 'error' });
-        this.cartSelect = 1;
+        this.cartQty = 1;
       } else {
-        this.cartSelect--;
+        this.cartQty--;
       }
     },
     toggleFavorite (product) {
@@ -136,27 +146,35 @@ export default {
         .dispatch('favoriteModules/toggleFavorite', product)
         .then((response) => {
           this.isFavorite = response;
+          this.getFavorites();
           this.$swal({
             title: `${this.isFavorite ? '加入' : '移除'}我的最愛`,
             icon: 'success'
           });
         });
     },
+    getFavorites () {
+      this.favoriteList = [];
+      this.favorites.forEach((item) => {
+        this.favoriteList.push(item.id);
+      });
+    },
 
     changeRoute (router) {
       this.$router.push(router);
     },
 
-    ...mapActions('productsModules', ['getProducts']),
-    ...mapActions('favoriteModules', ['getFavorite'])
+    ...mapActions('productsModules', ['getProducts'])
   },
   computed: {
-    ...mapGetters('productsModules', ['products'])
+    ...mapGetters('productsModules', ['products']),
+    ...mapGetters('favoriteModules', ['favorites', 'favoritesLength'])
   },
   created () {
     this.id = this.$route.params.productId;
     this.getProduct();
     this.getProducts();
+    this.getFavorites();
   }
 };
 </script>

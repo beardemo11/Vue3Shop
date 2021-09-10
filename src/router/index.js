@@ -78,6 +78,10 @@ const routes = [
         component: () => import('../views/Front/UserCheckout.vue')
       }
     ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: { name: 'Home' }
   }
 ];
 

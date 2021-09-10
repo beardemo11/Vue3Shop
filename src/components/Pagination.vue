@@ -1,6 +1,6 @@
 <template>
   <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
+    <ul class="pagination pagination-lg justify-content-center">
       <li class="page-item" :class="{ disabled: !paginationData.has_pre }">
         <button type="button" class="page-link" @click="changePage('pre')">
           <span aria-hidden="true">&laquo;</span>
