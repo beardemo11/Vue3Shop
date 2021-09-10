@@ -65,8 +65,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 export default {
-  inject: ['reload'], // 使用 inject 注入 reload 变量
-
   data () {
     return {};
   },
@@ -83,8 +81,11 @@ export default {
       this.$swal({
         title: '移除我的最愛',
         icon: 'success'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$router.go(0);
+        }
       });
-      this.reload();
     },
 
     ...mapActions('favoriteModules', ['getFavorite'])
@@ -94,7 +95,7 @@ export default {
   },
   watch: {
     $route (to, from) {
-      this.reload();
+      this.$router.go(0);
     }
   }
 };

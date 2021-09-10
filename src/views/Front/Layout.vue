@@ -1,7 +1,6 @@
 <template>
   <div>
     <Loading :active="isLoading"></Loading>
-
     <FrontNavbar />
     <router-view></router-view>
     <Footer></Footer>

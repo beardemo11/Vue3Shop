@@ -13,7 +13,7 @@
           <a
             @click.prevent="deleteAllCart"
             v-if="cartLength > 0"
-            class="btn btn-danger"
+            class="btn btn-danger fw-bold"
           >
             刪除全部
           </a>
@@ -25,7 +25,6 @@
               <th width="20%">產品名稱</th>
               <th width="20%">數量</th>
               <th width="20%">價格</th>
-              <!-- <th width="15%">小計</th> -->
               <th width="10%"></th>
             </tr>
           </thead>
@@ -71,9 +70,6 @@
                 NT $
                 {{ $filters.currency(item.product.price) }}
               </td>
-              <!-- <td class="fw-bold" data-title="小計">
-                NT ${{ $filters.currency(item.product.price * item.qty) }}
-              </td> -->
               <td>
                 <button
                   type="button"
@@ -87,18 +83,18 @@
           </tbody>
           <tfoot>
             <tr>
-              <td colspan="3" class="pb35">
-                <div class="input-group igw">
+              <td colspan="5">
+                <div class="input-group ms-auto" style="width: 350px">
                   <input
                     type="text"
-                    class="form-control"
-                    placeholder="折扣碼FlyGO"
+                    class="form-control fw-bold"
+                    placeholder="購物金折扣碼【FlyGO】"
                     aria-label="coupons-btn"
                     aria-describedby="coupons-btn"
                     v-model="coupon_code"
                   /><button
                     type="button"
-                    class="btn btn-secondary text-white coupon"
+                    class="btn btn-secondary text-white coupon fw-bold"
                     @click="addCoupon"
                     :disabled="cartLength < 1"
                   >
@@ -106,8 +102,10 @@
                   </button>
                 </div>
               </td>
+            </tr>
 
-              <td colspan="2" class="text-end fw-bold align-baseline">
+            <tr>
+              <td colspan="5" class="text-end fw-bold align-baseline">
                 <p class="display-10 fw-bold">
                   小計 : NT ${{ $filters.currency(cart.total) }}
                 </p>
@@ -135,7 +133,7 @@
             </tr>
             <tr>
               <td colspan="3" align="left">
-                <a href="#/cart" class="btn btn-success"
+                <a href="#/cart" class="btn btn-success fw-bold"
                   ><i class="bi bi-chevron-left"></i> 繼續購物
                 </a>
               </td>
@@ -144,7 +142,7 @@
                 <a
                   href="#/checkout"
                   v-if="cartLength > 0"
-                  class="btn btn-success"
+                  class="btn btn-success fw-bold"
                 >
                   結帳<i class="bi bi-chevron-right"></i>
                 </a>
@@ -152,16 +150,6 @@
             </tr>
           </tfoot>
         </table>
-        <!-- <div class="text-start">
-          <a href="#/cart" class="btn btn-success" data-v-71c673de=""
-            ><i class="bi bi-chevron-left" data-v-71c673de=""></i> 繼續購物
-          </a>
-        </div>
-        <div class="text-end">
-          <a href="#/checkout" v-if="cartLength > 0" class="btn btn-success">
-            結帳<i class="bi bi-chevron-right"></i>
-          </a>
-        </div> -->
       </div>
     </div>
   </div>
@@ -185,25 +173,21 @@ export default {
     },
     deleteAllCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`;
-
-      this.$swal
-        .fire({
-          title: '確定刪除購物車?',
-          text: '您將無法還原此內容！',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: '是的, 確定刪除!'
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            this.$swal.fire('Deleted!', '已經刪除購物車', 'success');
-            this.$http.delete(url).then((res) => {
-              this.getCart();
-            });
-          }
-        });
+      this.$swal({
+        title: '確定刪除全部購物車?',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '是的, 確定刪除!',
+        icon: 'success'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$swal.fire('Deleted!', '已經刪除購物車', 'success');
+          this.$http.delete(url).then((res) => {
+            this.getCart();
+          });
+        }
+      });
     },
     addCoupon () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`;
@@ -245,11 +229,5 @@ export default {
 <style scoped>
 .coupon {
   background-color: #59ab6e;
-}
-.pb35 {
-  padding-bottom: 6rem;
-}
-.igw {
-  width: 115%;
 }
 </style>

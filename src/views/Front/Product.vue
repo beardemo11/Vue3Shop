@@ -14,38 +14,10 @@
             <div class="card-body">
               <h1 class="h2 fw-bold">{{ product.title }}</h1>
               <p class="h3 py-2 fw-bold">NT ${{ product.price }}</p>
-              <!-- <p class="py-2">
-                <i class="fa fa-star text-warning"></i>
-                <i class="fa fa-star text-warning"></i>
-                <i class="fa fa-star text-warning"></i>
-                <i class="fa fa-star text-warning"></i>
-                <i class="fa fa-star text-secondary"></i>
-                <span class="list-inline-item text-dark"
-                  >Rating 4.8 | 36 Comments</span
-                >
-              </p> -->
-              <!-- <ul class="list-inline">
-                <li class="list-inline-item">
-                  <h6>Brand:</h6>
-                </li>
-                <li class="list-inline-item">
-                  <p class="text-muted"><strong>Easy Wear</strong></p>
-                </li>
-              </ul> -->
-
               <h6 class="fw-bold">說明:</h6>
               <p class="fw-bold">
                 {{ product.description }}
               </p>
-              <!-- <ul class="list-inline">
-                <li class="list-inline-item">
-                  <h6>Avaliable Color :</h6>
-                </li>
-                <li class="list-inline-item">
-                  <p class="text-muted"><strong>White / Black</strong></p>
-                </li>
-              </ul> -->
-
               <input type="hidden" name="product-title" value="Activewear" />
               <div class="row">
                 <div class="col-auto">

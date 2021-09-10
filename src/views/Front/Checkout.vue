@@ -18,7 +18,7 @@
                 id="name"
                 name="姓名"
                 type="text"
-                class="form-control"
+                class="form-control fw-bold"
                 :class="{ 'is-invalid': errors['姓名'] }"
                 placeholder="請輸入姓名"
                 rules="required"
@@ -35,7 +35,7 @@
                 id="email"
                 name="email"
                 type="email"
-                class="form-control"
+                class="form-control fw-bold"
                 :class="{ 'is-invalid': errors['email'] }"
                 placeholder="請輸入 Email"
                 rules="email|required"
@@ -52,7 +52,7 @@
                 id="tel"
                 name="電話"
                 type="tel"
-                class="form-control"
+                class="form-control fw-bold"
                 :class="{ 'is-invalid': errors['電話'] }"
                 placeholder="請輸入電話"
                 rules="required"
@@ -69,7 +69,7 @@
                 id="address"
                 name="地址"
                 type="text"
-                class="form-control"
+                class="form-control fw-bold"
                 :class="{ 'is-invalid': errors['地址'] }"
                 placeholder="請輸入地址"
                 rules="required"
@@ -85,7 +85,7 @@
               <textarea
                 name=""
                 id="message"
-                class="form-control"
+                class="form-control fw-bold"
                 cols="30"
                 rows="10"
                 v-model="form.message"
@@ -113,13 +113,9 @@
                     :alt="cart.product.title"
                   />
                   <div class="p-2">
-                    <h4 class="font-md-normal fw-bold">
+                    <h4 class="h4 font-md-normal fw-bold">
                       {{ cart.product.title }} x {{ cart.qty }}
                     </h4>
-                    <!-- <h5 class="font-md-normal d-flex align-items-center">
-                      US 8.5 <span class="ms-1"> </span>
-                    </h5>
-                    <h5 class="font-md-normal">顏色：白色</h5> -->
                   </div>
                 </div>
                 <p>NT$ {{ $filters.currency(cart.product.price) }}</p>

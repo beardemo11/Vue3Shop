@@ -19,8 +19,10 @@
         >
           <div class="content">
             <p class="fs-1"></p>
-            <p class="fs-3">{{ item.description }}</p>
-            <a href="#/product_list" class="btn btn-dark btn-hover rounded-0"
+            <p class="fs-3 fw-bold">{{ item.description }}</p>
+            <a
+              href="#/product_list"
+              class="btn btn-dark btn-hover rounded-0 fw-bold"
               >了解更多</a
             >
           </div>

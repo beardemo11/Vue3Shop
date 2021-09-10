@@ -108,6 +108,7 @@
               type="submit"
               class="btn btn-success fw-bold"
               @click="pay(order.id)"
+              v-if="!order.is_paid"
             >
               確認付款
             </button>
