@@ -27,6 +27,7 @@
       <div class="col-md-12">
         <div class="text-end">
           <a
+            href="#"
             @click.prevent="deleteAllCart"
             v-if="cartLength > 0"
             class="btn btn-danger fw-bold"
@@ -166,6 +167,7 @@
             </tr>
           </tfoot>
         </table>
+        <div class="pb35"></div>
       </div>
     </div>
   </div>
@@ -199,7 +201,7 @@ export default {
         icon: 'warning'
       }).then((result) => {
         if (result.isConfirmed) {
-          this.$swal.fire('Deleted!', '已經刪除購物車', 'success');
+          this.$swal.fire({ title: '已經刪除購物車!', icon: 'success' });
           this.$http.delete(url).then((res) => {
             this.getCart();
           });
@@ -242,3 +244,12 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.coupon {
+  background-color: #59ab6e;
+}
+.pb35 {
+  padding-bottom: 8rem;
+}
+</style>

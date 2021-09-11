@@ -52,7 +52,7 @@
                       <li>
                         <a
                           class="btn btn-success text-white mt-2"
-                          href=""
+                          href="#"
                           @click.prevent="goToProduct(item.id)"
                           ><i class="far fa-eye"></i
                         ></a>

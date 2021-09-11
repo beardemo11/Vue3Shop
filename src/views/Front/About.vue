@@ -4,7 +4,7 @@
     <div class="container">
       <div class="row align-items-center py-5">
         <div class="col-md-8 text-white">
-          <h1>About Us</h1>
+          <h1>關於我們</h1>
           <p class="fw-bold">
             追星、追韓劇、追綜藝節目的韓國迷們，一定要到韓國旅遊，親自走訪那些只能透過電視才能看到的韓國景點，沒看過韓劇的夥伴們，北村韓屋村、
             景福宮 、海東龍宮寺
