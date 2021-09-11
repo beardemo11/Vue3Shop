@@ -90,7 +90,7 @@
               <td>
                 <button
                   type="button"
-                  class="btn btn-outline-info"
+                  class="btn btn-outline-success"
                   @click.prevent="removeCartItem(item.id)"
                 >
                   <i class="bi bi-trash"></i>

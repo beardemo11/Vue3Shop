@@ -48,7 +48,7 @@
               </div>
               <button
                 type="button"
-                class="btn btn-outline-info"
+                class="btn btn-outline-success"
                 @click.prevent="removeFavorite(item, false)"
               >
                 <i class="bi bi-trash"></i>
