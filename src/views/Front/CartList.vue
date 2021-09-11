@@ -1,8 +1,24 @@
 <template>
   <div class="container-fluid bg-light py-5">
     <div class="col-md-6 m-auto text-center">
-      <h1 class="h1 fw-bold">我的購物車</h1>
-      <p class="fw-bold">請確認購物車內容</p>
+      <div class="row row-pb-lg">
+        <div class="col-md-10 offset-md-1">
+          <div class="process-wrap">
+            <div class="process text-center active">
+              <p><span>01</span></p>
+              <h3>購物車</h3>
+            </div>
+            <div class="process text-center">
+              <p><span>02</span></p>
+              <h3>訂購資訊</h3>
+            </div>
+            <div class="process text-center">
+              <p><span>03</span></p>
+              <h3>訂單完成</h3>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -94,7 +110,7 @@
                     v-model="coupon_code"
                   /><button
                     type="button"
-                    class="btn btn-secondary text-white coupon fw-bold"
+                    class="btn btn-success text-white fw-bold"
                     @click="addCoupon"
                     :disabled="cartLength < 1"
                   >
@@ -150,7 +166,6 @@
             </tr>
           </tfoot>
         </table>
-        <div class="pb35"></div>
       </div>
     </div>
   </div>
@@ -227,12 +242,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.coupon {
-  background-color: #59ab6e;
-}
-.pb35 {
-  padding-bottom: 8rem;
-}
-</style>

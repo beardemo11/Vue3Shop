@@ -1,10 +1,25 @@
 <template>
   <div class="container-fluid bg-light py-5">
     <div class="col-md-6 m-auto text-center">
-      <p class="fs-1 me-3">
-        <i class="bi bi-check-circle-fill text-success" style="top: -10px"></i>
-      </p>
-      <h1 class="h1 fw-bold">感謝您！您的訂單已建立完成</h1>
+      <div class="row row-pb-lg">
+        <div class="col-md-10 offset-md-1">
+          <div class="process-wrap">
+            <div class="process text-center">
+              <p><span>01</span></p>
+              <h3>購物車</h3>
+            </div>
+            <div class="process text-center">
+              <p><span>02</span></p>
+              <h3>訂購資訊</h3>
+            </div>
+            <div class="process text-center active">
+              <p><span>03</span></p>
+              <h3>訂單完成</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
       <p class="fw-bold">訂單編號: {{ orderId }}</p>
     </div>
   </div>
@@ -101,17 +116,17 @@
                 </p>
                 <p class="bg-danger rounded text-white px-2" v-else>未付款</p>
               </li>
+              <div v-if="!order.is_paid" class="text-end">
+                <button
+                  type="submit"
+                  class="btn btn-success fw-bold"
+                  @click="pay(order.id)"
+                  v-if="!order.is_paid"
+                >
+                  確認付款
+                </button>
+              </div>
             </ul>
-          </div>
-          <div class="py-4 text-end d-none d-lg-block">
-            <button
-              type="submit"
-              class="btn btn-success fw-bold"
-              @click="pay(order.id)"
-              v-if="!order.is_paid"
-            >
-              確認付款
-            </button>
           </div>
         </div>
       </div>

@@ -198,7 +198,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import Pagination from '@/components/Pagination.vue';
-// import Banner from '@/components/Banner.vue';
 
 export default {
   data () {
