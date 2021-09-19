@@ -172,8 +172,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import 'swiper/swiper.scss';
-import 'swiper/components/pagination/pagination.min.css';
 import SwiperCore, { Autoplay, Pagination } from 'swiper/core';
 SwiperCore.use([Autoplay, Pagination]);
 
@@ -244,3 +242,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+@import '~swiper/swiper.scss';
+@import '~swiper/components/pagination/pagination.min.css';
+@import '~swiper/components/navigation/navigation.min.css';
+</style>

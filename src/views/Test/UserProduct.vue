@@ -16,7 +16,7 @@
         <h2>{{ product.title }}</h2>
         <div>{{ product.content }}</div>
         <div>{{ product.description }}</div>
-        <img :src="product.imageUrl" alt="" class="img-fluid mb-3" />
+        <img :src="product.imageUrl" alt="imageUrl" class="img-fluid mb-3" />
       </article>
       <div class="col-4">
         <div class="h5" v-if="!product.price">

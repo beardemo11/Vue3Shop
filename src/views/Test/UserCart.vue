@@ -233,7 +233,7 @@
           ></textarea>
         </div>
         <div class="text-end">
-          <button class="btn btn-danger">送出訂單</button>
+          <button type="button" class="btn btn-danger">送出訂單</button>
         </div>
       </Form>
     </div>

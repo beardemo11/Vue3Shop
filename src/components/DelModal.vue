@@ -50,6 +50,7 @@
 import modalMixin from '@/mixins/modalMixin';
 
 export default {
+  emits: [],
   props: {
     item: {}
   },

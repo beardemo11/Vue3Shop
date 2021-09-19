@@ -109,6 +109,7 @@ export default {
     };
   },
   emits: ['update-coupon'],
+
   watch: {
     coupon () {
       this.tempCoupon = this.coupon;

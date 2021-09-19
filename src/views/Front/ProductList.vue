@@ -268,7 +268,7 @@ export default {
     changeCategories (cate) {
       this.filterText = cate;
       this.renderProducts = [];
-      this.resultProduct.forEach((item, index) => {
+      this.resultProduct.forEach((item) => {
         if (cate === item.category) {
           this.renderProducts.push(item);
           this.getPaginationData(1, this.renderProducts);

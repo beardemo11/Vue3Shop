@@ -46,7 +46,11 @@
                   @change="uploadFile"
                 />
               </div>
-              <img class="img-fluid" alt="" :src="tempProduct.imageUrl" />
+              <img
+                class="img-fluid"
+                alt="imageUrl"
+                :src="tempProduct.imageUrl"
+              />
               <div class="mt-5">
                 <div class="mb-3 input-group">
                   <input
@@ -59,7 +63,10 @@
                   </button>
                 </div>
                 <div>
-                  <button class="btn btn-outline-primary btn-sm d-block w-100">
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary btn-sm d-block w-100"
+                  >
                     新增圖片
                   </button>
                 </div>
@@ -184,9 +191,11 @@
 </template>
 
 <script>
-import Modal from 'bootstrap/js/dist/modal';
+import modalMixin from '@/mixins/modalMixin';
 
 export default {
+  emits: [],
+  mixins: [modalMixin],
   props: {
     product: {
       type: Object,
@@ -205,12 +214,6 @@ export default {
     return { modal: {}, tempProduct: {} };
   },
   methods: {
-    showModal () {
-      this.modal.show();
-    },
-    hideModal () {
-      this.modal.hide();
-    },
     uploadFile () {
       const uploadFile = this.$refs.fileInput.files[0];
       const formData = new FormData();
@@ -224,11 +227,6 @@ export default {
 
       console.dir(uploadFile);
     }
-  },
-  mounted () {
-    this.modal = new Modal(this.$refs.modal);
   }
 };
 </script>
-
-<style lang="scss" scoped></style>

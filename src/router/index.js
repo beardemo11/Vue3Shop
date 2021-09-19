@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 const routes = [
   {
     path: '/login',
+    name: 'Login',
     component: () => import('../views/Admin/Login.vue')
   },
   {
@@ -27,55 +28,67 @@ const routes = [
       },
       {
         path: 'product/:productId',
+        name: 'Product',
         component: () => import('../views/Front/Product.vue')
       },
       {
         path: 'cartList',
+        name: 'CartList',
         component: () => import('../views/Front/CartList.vue')
       },
       {
         path: 'orderForm/:orderId',
+        name: 'OrderForm',
         component: () => import('../views/Front/OrderForm.vue')
       },
       {
         path: 'checkout',
+        name: 'Checkout',
         component: () => import('../views/Front/Checkout.vue')
       }
     ]
   },
   {
     path: '/admin',
+    name: 'Dashboard',
     component: () => import('../views/Admin/Dashboard.vue'),
     children: [
       {
         path: 'products',
+        name: 'Products',
         component: () => import('../views/Admin/Products.vue')
       },
       {
         path: 'orders',
+        name: 'Orders',
         component: () => import('../views/Admin/Orders.vue')
       },
       {
         path: 'coupons',
+        name: 'Coupons',
         component: () => import('../views/Admin/Coupons.vue')
       }
     ]
   },
   {
     path: '/user',
-    component: () => import('../views/Front/Userboard.vue'),
+    name: 'Userboard',
+    component: () => import('../views/Test/Userboard.vue'),
     children: [
       {
         path: 'cart',
-        component: () => import('../views/Front/UserCart.vue')
+        name: 'UserCart',
+        component: () => import('../views/Test/UserCart.vue')
       },
       {
         path: 'product/:productId',
-        component: () => import('../views/Front/UserProduct.vue')
+        name: 'UserProduct',
+        component: () => import('../views/Test/UserProduct.vue')
       },
       {
         path: 'checkout/:orderId',
-        component: () => import('../views/Front/UserCheckout.vue')
+        name: 'UserCheckout',
+        component: () => import('../views/Test/UserCheckout.vue')
       }
     ]
   },

@@ -94,7 +94,7 @@ export default {
     ...mapGetters('favoriteModules', ['favorites', 'favoritesLength'])
   },
   watch: {
-    $route (to, from) {
+    $route () {
       this.$router.go(0);
     }
   }

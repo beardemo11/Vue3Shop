@@ -32,12 +32,9 @@
   </div>
 </template>
 
-<script scoped>
+<script>
 import { mapGetters, mapActions } from 'vuex';
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import 'swiper/swiper.scss';
-import 'swiper/components/pagination/pagination.min.css';
-import 'swiper/components/navigation/navigation.min.css';
 import SwiperCore, { Autoplay, Pagination, Navigation } from 'swiper/core';
 
 SwiperCore.use([Autoplay, Pagination, Navigation]);
@@ -60,6 +57,12 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+@import '~swiper/swiper.scss';
+@import '~swiper/components/pagination/pagination.min.css';
+@import '~swiper/components/navigation/navigation.min.css';
+</style>
 
 <style scoped>
 .aa-slider-area {

@@ -28,12 +28,14 @@
         <td>
           <div class="btn-group">
             <button
+              type="button"
               class="btn btn-outline-primary btn-sm"
               @click="openModal(false, item)"
             >
               編輯
             </button>
             <button
+              type="button"
               class="btn btn-outline-danger btn-sm"
               @click="openDelModal(item)"
             >
@@ -72,7 +74,6 @@ export default {
     DelModal,
     Pagination
   },
-  inject: ['emitter'],
   methods: {
     getProducts (page = 1) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`;
@@ -143,5 +144,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped></style>
