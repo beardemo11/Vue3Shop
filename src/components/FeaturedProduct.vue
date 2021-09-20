@@ -209,7 +209,11 @@ export default {
     },
     addCart (id, qty = 1) {
       this.$store.dispatch('cartModules/addCart', { id, qty });
-      this.$swal({ title: '加入購物車成功', icon: 'success' });
+      this.$swal({
+        title: '加入購物車成功',
+        icon: 'success',
+        confirmButtonColor: '#59ab6e'
+      });
     },
     toggleFavorite (product) {
       this.$store
@@ -218,7 +222,8 @@ export default {
           this.isFavorite = response;
           this.$swal({
             title: `${this.isFavorite ? '加入' : '移除'}我的最愛`,
-            icon: 'success'
+            icon: 'success',
+            confirmButtonColor: '#59ab6e'
           });
         });
     },

@@ -40,9 +40,7 @@
                       >
                     </li>
                     <li class="list-inline-item">
-                      <span class="badge bg-secondary" id="var-value">{{
-                        cartQty
-                      }}</span>
+                      <span id="var-value">{{ cartQty }}</span>
                     </li>
                     <li class="list-inline-item">
                       <span
@@ -127,7 +125,8 @@ export default {
       this.$store.dispatch('cartModules/addCart', { id, qty });
       this.$swal({
         title: '加入購物車成功',
-        icon: 'success'
+        icon: 'success',
+        confirmButtonColor: '#59ab6e'
       });
     },
     addQty () {
@@ -135,7 +134,11 @@ export default {
     },
     minusQty () {
       if (this.cartQty <= 1) {
-        this.$swal({ title: '數量需大於1', icon: 'error' });
+        this.$swal({
+          title: '數量需大於1',
+          icon: 'error',
+          confirmButtonColor: '#59ab6e'
+        });
         this.cartQty = 1;
       } else {
         this.cartQty--;
@@ -149,7 +152,8 @@ export default {
           this.getFavorites();
           this.$swal({
             title: `${this.isFavorite ? '加入' : '移除'}我的最愛`,
-            icon: 'success'
+            icon: 'success',
+            confirmButtonColor: '#59ab6e'
           });
         });
     },

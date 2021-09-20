@@ -57,8 +57,20 @@
           </div>
         </li>
       </ul>
-      <p class="py-5 fw-bold" v-else>目前無產品</p>
-      <div>
+      <div v-else>
+        <p class="py-5 fw-bold">目前無產品</p>
+        <div class="p-3">
+          <button
+            @click.prevent="changeRoute('/product_list')"
+            type="button"
+            class="btn btn-outline-success btn-lg w-100 mb-3 fw-bold"
+          >
+            前往產品列表
+          </button>
+        </div>
+      </div>
+
+      <div v-if="cart.final_total > 0">
         <div class="offcanvas-footer border">
           <div class="p-3">
             <p class="fw-bold">
@@ -102,7 +114,11 @@ export default {
     },
     removeCartItem (id) {
       this.$store.dispatch('cartModules/removeCartItem', id);
-      this.$swal({ title: '刪除成功!', icon: 'success' });
+      this.$swal({
+        title: '刪除成功!',
+        icon: 'success',
+        confirmButtonColor: '#59ab6e'
+      });
     },
     changeRoute (router) {
       this.$router.push(router);

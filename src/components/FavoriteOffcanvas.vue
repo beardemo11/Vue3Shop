@@ -57,7 +57,18 @@
           </div>
         </li>
       </ul>
-      <p class="py-5 fw-bold" v-else>目前無產品</p>
+      <div v-else>
+        <p class="py-5 fw-bold">目前無產品</p>
+        <div class="p-3">
+          <button
+            @click.prevent="changeRoute('/product_list')"
+            type="button"
+            class="btn btn-outline-success btn-lg w-100 mb-3 fw-bold"
+          >
+            前往產品列表
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -72,7 +83,9 @@ export default {
     goToProduct (id) {
       this.$router.push(`/product/${id}`);
     },
-
+    changeRoute (router) {
+      this.$router.push(router);
+    },
     removeFavorite (favorite, delall) {
       this.$store.dispatch('favoriteModules/removeFavorite', {
         favoriteItem: favorite,
@@ -80,7 +93,8 @@ export default {
       });
       this.$swal({
         title: '移除我的最愛',
-        icon: 'success'
+        icon: 'success',
+        confirmButtonColor: '#59ab6e'
       }).then((result) => {
         if (result.isConfirmed) {
           this.$router.go(0);

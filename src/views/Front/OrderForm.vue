@@ -26,6 +26,15 @@
   <div class="container">
     <div class="py-4 py-md-6">
       <div class="row gx-lg-5">
+        <div class="text-center fw-bold pb-3 mb-3">
+          <h2>付款成功</h2>
+          <span>您好，以下是您的交易資訊</span>
+          <div class="text-center">
+            <a href="#/product_list" class="btn btn-success fw-bold">
+              繼續購物
+            </a>
+          </div>
+        </div>
         <div class="col-lg-6 order-2 order-lg-1">
           <h3 class="fw-bold font-md border-bottom pb-3 mb-3">訂單資訊</h3>
           <ul class="list-group-flush">
@@ -160,10 +169,18 @@ export default {
         )
         .then((res) => {
           if (res.data.success) {
-            this.$swal({ title: '付款完成!', icon: 'success' });
+            this.$swal({
+              title: '付款完成!',
+              icon: 'success',
+              confirmButtonColor: '#59ab6e'
+            });
             this.getOrder(id);
           } else {
-            this.$swal({ title: '付款失敗!', icon: 'error' });
+            this.$swal({
+              title: '付款失敗!',
+              icon: 'error',
+              confirmButtonColor: '#59ab6e'
+            });
           }
         });
     }

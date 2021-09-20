@@ -29,7 +29,8 @@
             <h3 class="fw-bold font-md border-bottom pb-3 mb-3">購買者資訊</h3>
 
             <div class="mb-3 mb-lg-4">
-              <label for="name" class="form-label fw-bold">姓名</label
+              <label for="name" class="form-label fw-bold"
+                >姓名<span style="color: red">*</span></label
               ><Field
                 id="name"
                 name="姓名"
@@ -46,7 +47,9 @@
               ></ErrorMessage>
             </div>
             <div class="mb-3 mb-lg-4">
-              <label for="email" class="form-label fw-bold">Email</label>
+              <label for="email" class="form-label fw-bold"
+                >Email<span style="color: red">*</span>
+              </label>
               <Field
                 id="email"
                 name="email"
@@ -63,7 +66,9 @@
               ></ErrorMessage>
             </div>
             <div class="mb-3 mb-lg-4">
-              <label for="tel" class="form-label fw-bold">收件人電話</label>
+              <label for="tel" class="form-label fw-bold"
+                >收件人電話<span style="color: red">*</span>
+              </label>
               <Field
                 id="tel"
                 name="電話"
@@ -80,7 +85,9 @@
               ></ErrorMessage>
             </div>
             <div class="mb-3 mb-lg-4">
-              <label for="address" class="form-label fw-bold">收件人地址</label>
+              <label for="address" class="form-label fw-bold"
+                >收件人地址<span style="color: red">*</span>
+              </label>
               <Field
                 id="address"
                 name="地址"
@@ -220,7 +227,8 @@ export default {
           const orderId = res.data.orderId;
           this.$swal({
             title: '建立訂單成功',
-            icon: 'success'
+            icon: 'success',
+            confirmButtonColor: '#59ab6e'
           }).then((result) => {
             if (result.isConfirmed) {
               this.$router.push(`/orderForm/${orderId}`);
@@ -229,7 +237,8 @@ export default {
         } else {
           this.$swal({
             title: '購物車沒有商品',
-            icon: 'error'
+            icon: 'error',
+            confirmButtonColor: '#59ab6e'
           });
         }
       });

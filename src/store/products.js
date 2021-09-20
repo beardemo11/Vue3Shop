@@ -12,20 +12,30 @@ export default {
     getProducts (context) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
       context.commit('LOADING', true, { root: true });
-      axios.get(url).then((res) => {
-        context.commit('PRODUCTS', res.data.products);
-        context.commit('CATEGORIES', res.data.products);
-        context.commit('LOADING', false, { root: true });
-      });
+      axios
+        .get(url)
+        .then((res) => {
+          context.commit('PRODUCTS', res.data.products);
+          context.commit('CATEGORIES', res.data.products);
+          context.commit('LOADING', false, { root: true });
+        })
+        .catch(() => {
+          alert('網頁發生錯誤，請重新整理此頁面！');
+        });
     },
     getAllProducts (context, page) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/?page=${page}`;
       context.commit('LOADING', true, { root: true });
-      axios.get(url).then((res) => {
-        context.commit('ALLPRODUCTS', res.data.products);
-        context.commit('PAGINATION', res.data.pagination);
-        context.commit('LOADING', false, { root: true });
-      });
+      axios
+        .get(url)
+        .then((res) => {
+          context.commit('ALLPRODUCTS', res.data.products);
+          context.commit('PAGINATION', res.data.pagination);
+          context.commit('LOADING', false, { root: true });
+        })
+        .catch(() => {
+          alert('網頁發生錯誤，請重新整理此頁面！');
+        });
     }
   },
   mutations: {

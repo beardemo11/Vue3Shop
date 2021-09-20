@@ -188,7 +188,11 @@ export default {
     },
     removeCartItem (id) {
       this.$store.dispatch('cartModules/removeCartItem', id);
-      this.$swal({ title: '刪除成功!', icon: 'success' });
+      this.$swal({
+        title: '刪除成功!',
+        icon: 'success',
+        confirmButtonColor: '#59ab6e'
+      });
     },
     deleteAllCart () {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`;
@@ -218,13 +222,25 @@ export default {
           if (res.data.success) {
             this.getCart();
             this.coupon_code = '';
-            this.$swal({ title: '已套用優惠卷', icon: 'success' });
+            this.$swal({
+              title: '已套用優惠卷',
+              icon: 'success',
+              confirmButtonColor: '#59ab6e'
+            });
           } else {
-            this.$swal({ title: '找不到優惠卷', icon: 'error' });
+            this.$swal({
+              title: '找不到優惠卷',
+              icon: 'error',
+              confirmButtonColor: '#59ab6e'
+            });
           }
         });
       } else {
-        this.$swal({ title: '請輸入優惠碼!', icon: 'error' });
+        this.$swal({
+          title: '請輸入優惠碼!',
+          icon: 'error',
+          confirmButtonColor: '#59ab6e'
+        });
       }
     },
 

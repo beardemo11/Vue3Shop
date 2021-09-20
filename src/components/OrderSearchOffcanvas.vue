@@ -58,20 +58,29 @@ export default {
               if (order !== null) {
                 this.$swal({
                   title: '謝謝您的訂購',
-                  icon: 'success'
+                  icon: 'success',
+                  confirmButtonColor: '#59ab6e'
                 }).then((result) => {
                   if (result.isConfirmed) {
                     this.$router.push(`/orderForm/${order.id}`);
                   }
                 });
               } else {
-                this.$swal({ title: '查無訂單', icon: 'error' });
+                this.$swal({
+                  title: '查無訂單',
+                  icon: 'error',
+                  confirmButtonColor: '#59ab6e'
+                });
               }
               this.orderSearilNumber = '';
             }
           });
       } else {
-        this.$swal({ title: '請輸入訂單號碼', icon: 'error' });
+        this.$swal({
+          title: '請輸入訂單號碼',
+          icon: 'error',
+          confirmButtonColor: '#59ab6e'
+        });
       }
     }
   }

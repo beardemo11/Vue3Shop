@@ -10,19 +10,29 @@ export default {
     getCart (context) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
       context.commit('LOADING', true, { root: true });
-      axios.get(url).then((res) => {
-        context.commit('CART', res.data.data);
-        context.commit('CART_LENGTH', res.data.data.carts.length);
-        context.commit('LOADING', false, { root: true });
-      });
+      axios
+        .get(url)
+        .then((res) => {
+          context.commit('CART', res.data.data);
+          context.commit('CART_LENGTH', res.data.data.carts.length);
+          context.commit('LOADING', false, { root: true });
+        })
+        .catch(() => {
+          alert('網頁發生錯誤，請重新整理此頁面！');
+        });
     },
     removeCartItem (context, id) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`;
       context.commit('LOADING', true, { root: true });
-      axios.delete(url).then((res) => {
-        context.commit('LOADING', false, { root: true });
-        context.dispatch('getCart');
-      });
+      axios
+        .delete(url)
+        .then((res) => {
+          context.commit('LOADING', false, { root: true });
+          context.dispatch('getCart');
+        })
+        .catch(() => {
+          alert('網頁發生錯誤，請重新整理此頁面！');
+        });
     },
     addCart (context, { id, qty }) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
@@ -31,10 +41,15 @@ export default {
         product_id: id,
         qty: qty
       };
-      axios.post(url, { data: cart }).then((res) => {
-        context.dispatch('getCart');
-        context.commit('LOADING', false, { root: true });
-      });
+      axios
+        .post(url, { data: cart })
+        .then((res) => {
+          context.dispatch('getCart');
+          context.commit('LOADING', false, { root: true });
+        })
+        .catch(() => {
+          alert('網頁發生錯誤，請重新整理此頁面！');
+        });
     },
     minusCartQty (context, item) {
       context.state.cart.carts.forEach((cartItem) => {
@@ -49,9 +64,14 @@ export default {
         product_id: item.product_id,
         qty: item.qty
       };
-      axios.put(url, { data: cart }).then((res) => {
-        context.dispatch('getCart');
-      });
+      axios
+        .put(url, { data: cart })
+        .then((res) => {
+          context.dispatch('getCart');
+        })
+        .catch(() => {
+          alert('網頁發生錯誤，請重新整理此頁面！');
+        });
     },
     addCartQty (context, item) {
       context.state.cart.carts.forEach((cartItem) => {
@@ -64,9 +84,14 @@ export default {
         product_id: item.product_id,
         qty: item.qty
       };
-      axios.put(url, { data: cart }).then((res) => {
-        context.dispatch('getCart');
-      });
+      axios
+        .put(url, { data: cart })
+        .then((res) => {
+          context.dispatch('getCart');
+        })
+        .catch(() => {
+          alert('網頁發生錯誤，請重新整理此頁面！');
+        });
     }
   },
   mutations: {
