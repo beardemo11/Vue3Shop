@@ -23,6 +23,9 @@ export default {
       const { style = 'success', title, content } = message;
       this.messages.push({ style, title, content });
     });
+  },
+  unmounted () {
+    this.$emitter.off('push-message');
   }
 };
 </script>
