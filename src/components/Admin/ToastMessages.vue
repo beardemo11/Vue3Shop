@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Toast from '@/components/Toast.vue';
+import Toast from '@/components/Admin/Toast.vue';
 export default {
   components: { Toast },
   data () {

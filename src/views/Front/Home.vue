@@ -7,10 +7,10 @@
   </div>
 </template>
 <script>
-import Banner from '@/components/Banner.vue';
-import Feature from '@/components/Feature.vue';
-import FeaturedProduct from '@/components/FeaturedProduct.vue';
-import Subscribe from '@/components/Subscribe.vue';
+import Banner from '@/components/Front/Banner.vue';
+import Feature from '@/components/Front/Feature.vue';
+import FeaturedProduct from '@/components/Front/FeaturedProduct.vue';
+import Subscribe from '@/components/Front/Subscribe.vue';
 
 export default {
   components: { Banner, FeaturedProduct, Feature, Subscribe },

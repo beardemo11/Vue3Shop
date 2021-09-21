@@ -44,6 +44,7 @@
                 id="newsletter_submit"
                 class="newsletter_submit_btn trans_300"
                 value="Submit"
+                type="button"
                 @click.prevent="subscribe"
               >
                 subscribe

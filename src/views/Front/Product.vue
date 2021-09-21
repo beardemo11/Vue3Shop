@@ -98,7 +98,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import FeaturedProduct from '@/components/FeaturedProduct.vue';
+import FeaturedProduct from '@/components/Front/FeaturedProduct.vue';
 
 export default {
   components: { FeaturedProduct },

@@ -187,7 +187,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import Pagination from '@/components/Pagination.vue';
+import Pagination from '@/components/Front/Pagination.vue';
 
 export default {
   data () {

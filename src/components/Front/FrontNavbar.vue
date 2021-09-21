@@ -119,9 +119,9 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import CartOffcanvas from '@/components/CartOffcanvas.vue';
-import FavoriteOffcanvas from '@/components/FavoriteOffcanvas.vue';
-import OrderSearchOffcanvas from '@/components/OrderSearchOffcanvas.vue';
+import CartOffcanvas from '@/components/Front/CartOffcanvas.vue';
+import FavoriteOffcanvas from '@/components/Front/FavoriteOffcanvas.vue';
+import OrderSearchOffcanvas from '@/components/Front/OrderSearchOffcanvas.vue';
 
 export default {
   components: { CartOffcanvas, FavoriteOffcanvas, OrderSearchOffcanvas },
