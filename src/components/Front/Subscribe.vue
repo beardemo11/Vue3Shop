@@ -42,7 +42,7 @@
 
               <button
                 id="newsletter_submit"
-                class="newsletter_submit_btn trans_300"
+                class="newsletter_submit_btn trans_300 fw-bold btn-success"
                 value="Submit"
                 type="button"
                 @click.prevent="subscribe"
