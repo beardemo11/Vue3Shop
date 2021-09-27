@@ -18,7 +18,7 @@
           </div>
         </div>
         <div class="col-lg-6">
-          <form action="post">
+          <form ref="form" @submit.prevent="subscribe">
             <div
               class="
                 newsletter_form
@@ -28,24 +28,18 @@
                 justify-content-lg-end justify-content-center
               "
             >
-              <Field
-                id="email"
-                v-model="email"
-                name="email"
+              <input
                 type="email"
-                class="form-control fw-bold"
-                placeholder="請輸入 Email"
-                rules="email|required"
+                class="form-control"
+                placeholder="Enter email address"
+                v-model="email"
               />
-
-              <ErrorMessage name="email" class="invalid-feedback" />
 
               <button
                 id="newsletter_submit"
                 class="newsletter_submit_btn trans_300 fw-bold btn-success"
                 value="Submit"
-                type="button"
-                @click.prevent="subscribe"
+                type="submit"
               >
                 subscribe
               </button>
@@ -58,6 +52,8 @@
 </template>
 
 <script>
+import emailjs from 'emailjs-com';
+
 export default {
   data () {
     return {
@@ -66,11 +62,28 @@ export default {
   },
   methods: {
     subscribe () {
-      this.$swal({
-        icon: 'success',
-        title: '感謝您的訂閱！'
-      });
-      this.email = '';
+      emailjs
+        .send(
+          'gmail',
+          'template_bxizo7a',
+          { userMail: this.email },
+          'user_ExC2pAvCYRYPBmORN8HBR'
+        )
+        .then(
+          (result) => {
+            console.log('SUCCESS!', result.text);
+            this.$swal({
+              icon: 'success',
+              title: '感謝您的訂閱！'
+            });
+            this.email = '';
+          },
+          (error) => {
+            console.log('FAILED...', error.text);
+            this.$swal({ icon: 'error', title: error.text });
+            this.email = '';
+          }
+        );
     }
   }
 };
