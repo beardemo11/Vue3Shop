@@ -13,7 +13,7 @@
   <!-- Close Top Nav -->
 
   <!-- Header -->
-  <nav class="navbar navbar-expand-lg navbar-light shadow">
+  <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container d-flex justify-content-between align-items-center">
       <a class="navbar-brand text-success logo align-self-center" href="#">
         隨心飛

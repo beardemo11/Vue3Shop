@@ -3,7 +3,7 @@
   <div class="container py-5">
     <div class="row">
       <div class="col-lg-3">
-        <h1 class="h2 pb-4 fw-bold">韓國旅遊景點</h1>
+        <h1 class="h2 pb-4">韓國旅遊景點</h1>
         <ul class="list-unstyled templatemo-accordion">
           <li class="pb-3">
             <a
@@ -15,7 +15,6 @@
                 justify-content-between
                 h3
                 text-decoration-none
-                fw-bold
               "
               :class="{
                 'text-success': filterText === '' || filterText === undefined
@@ -38,7 +37,6 @@
                 justify-content-between
                 h3
                 text-decoration-none
-                fw-bold
               "
               :class="{ 'text-success': filterText === item }"
             >
@@ -57,7 +55,7 @@
                 <div class="input-group mb-2">
                   <input
                     type="search"
-                    class="form-control fw-bold"
+                    class="form-control"
                     placeholder="搜尋景點"
                     v-model="searchText"
                     @keyup.enter="searchProducts(searchText)"
@@ -132,7 +130,7 @@
                 <a
                   href="#"
                   @click.prevent="goToProduct(item.id)"
-                  class="h3 text-decoration-none fw-bold"
+                  class="h3 text-decoration-none"
                   >{{ item.title }}
                   <ul class="list-unstyled d-flex justify-content-center mb-1">
                     <li>
@@ -147,7 +145,7 @@
                     class="d-flex justify-content-center"
                     v-if="item.price === item.origin_price"
                   >
-                    <p class="text-center mb-0 fw-bold">
+                    <p class="text-center mb-0">
                       NT$ {{ $filters.currency(item.price) }}
                     </p>
                   </div>
@@ -156,7 +154,7 @@
                     <del class="text-muted fs-9"
                       >NT$ {{ $filters.currency(item.origin_price) }}
                     </del>
-                    <p class="text-start mb-0 fw-bold">
+                    <p class="text-start mb-0">
                       NT$ {{ $filters.currency(item.price) }}
                     </p>
                   </div>

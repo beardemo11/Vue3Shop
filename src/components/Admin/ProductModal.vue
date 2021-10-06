@@ -194,7 +194,6 @@
 import modalMixin from '@/mixins/modalMixin';
 
 export default {
-  emits: [],
   mixins: [modalMixin],
   props: {
     product: {

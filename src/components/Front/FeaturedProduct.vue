@@ -137,7 +137,7 @@
                       <i class="text-warning fa fa-star"></i>
                       <i class="text-warning fa fa-star"></i>
                       <i class="text-warning fa fa-star"></i>
-                      <i class="text-warning fa fa-star"></i>
+                      <i class="text-muted fa fa-star"></i>
                       <i class="text-muted fa fa-star"></i>
                     </li>
                   </ul>

@@ -31,7 +31,7 @@
               <input
                 type="email"
                 class="form-control"
-                placeholder="Enter email address"
+                placeholder="請輸入您的電子信箱"
                 v-model="email"
               />
 
@@ -41,7 +41,7 @@
                 value="Submit"
                 type="submit"
               >
-                subscribe
+                訂閱
               </button>
             </div>
           </form>

@@ -125,7 +125,7 @@ export default {
 }
 .h5c {
   color: #fff;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: bold;
   text-transform: uppercas;
 }

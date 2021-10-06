@@ -12,17 +12,17 @@
         <div class="col-lg-7 mt-5">
           <div class="card">
             <div class="card-body">
-              <h1 class="h2 fw-bold">{{ product.title }}</h1>
-              <p class="h3 py-2 fw-bold">NT ${{ product.price }}</p>
-              <h6 class="fw-bold">說明:</h6>
-              <p class="fw-bold">
+              <h1 class="h2">{{ product.title }}</h1>
+              <p class="h3 py-2">NT ${{ product.price }}</p>
+              <h6 class="">說明:</h6>
+              <p class="">
                 {{ product.description }}
               </p>
               <input type="hidden" name="product-title" value="Activewear" />
               <div class="row">
                 <div class="col-auto">
                   <ul class="list-inline pb-3">
-                    <li class="list-inline-item text-right fw-bold">
+                    <li class="list-inline-item text-right">
                       數量
                       <input
                         v-model="cartQty"
@@ -57,7 +57,7 @@
                 <div class="col d-grid">
                   <button
                     type="submit"
-                    class="btn btn-success btn-lg fw-bold"
+                    class="btn btn-success btn-lg"
                     name="submit"
                     value="addtocard"
                     @click.prevent="addCart(id, cartQty)"
@@ -65,10 +65,10 @@
                     加入購物車
                   </button>
                 </div>
-                <div class="col d-grid">
+                <div class="col">
                   <button
                     type="submit"
-                    class="btn btn-success btn-lg fw-bold"
+                    class="btn btn-outline-success btn-lg"
                     name="submit"
                     value="buy"
                     @click.prevent="toggleFavorite(product)"
@@ -81,8 +81,6 @@
                           : 'bi-heart'
                       ]"
                     ></i>
-
-                    加入我的最愛
                   </button>
                 </div>
               </div>
