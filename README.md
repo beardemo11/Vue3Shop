@@ -37,3 +37,16 @@ https://beardemo11.github.io/Vue3Shop/#/
 * ESlint
 * Bootstrap5
 * localStorage
+
+## 使用套件
+* vue-axios
+* VeeValidate (驗證表單)
+* vue-loading-overlay
+* swiper (輪播)
+* Bootstrap 5
+* Google Font
+* Font Awesome
+* vue-sweetalert2
+
+## API
+六角學院 vue-course-api
